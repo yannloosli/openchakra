@@ -1,7 +1,7 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { Box, Text, Link } from '@chakra-ui/react'
 import { useDropComponent } from '~hooks/useDropComponent'
-import SplitPane from 'react-split-pane'
+import SplitPane, { Pane } from 'split-pane-react'
 import CodePanel from '~components/CodePanel'
 import { useSelector } from 'react-redux'
 import useDispatch from '~hooks/useDispatch'
@@ -18,6 +18,7 @@ export const gridStyles = {
 }
 
 const Editor: React.FC = () => {
+  const [sizes, setSizes] = useState([100, '50%', 'auto']);
   const showCode = useSelector(getShowCode)
   const showLayout = useSelector(getShowLayout)
   const components = useSelector(getComponents)
@@ -88,19 +89,20 @@ const Editor: React.FC = () => {
   return (
     // @ts-ignore
     <SplitPane
-      style={{ overflow: 'auto' }}
-      defaultSize="50%"
-      resizerStyle={{
-        border: '3px solid rgba(1, 22, 39, 0.21)',
-        zIndex: 20,
-        cursor: 'row-resize',
-      }}
-      split="horizontal"
+      split='vertical'
+      sizes={sizes}
+      onChange={setSizes}
     >
-      {Playground}
-      <CodePanel />
+      <Pane minSize={50} maxSize='50%'>
+        <div>
+          {Playground}
+        </div>
+      </Pane>
+      <div>
+        <CodePanel />
+      </div>
     </SplitPane>
-  )
+  );
 }
 
 export default memo(Editor)

@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import ColorsControl from '~components/inspector/controls/ColorsControl'
 import InputSuggestion from '~components/inspector/inputs/InputSuggestion'
 import theme from '@chakra-ui/theme'
-import { ComboboxOption } from '@reach/combobox'
+import { Combobox } from '@headlessui/react'
 import FormControl from '~components/inspector/controls/FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
@@ -24,7 +24,7 @@ const IconPanel = () => {
           name="boxSize"
         >
           {Object.keys(theme.sizes).map((option, index) => (
-            <ComboboxOption key={index} value={option} />
+            <Combobox.Option key={index} value={option} />
           ))}
         </InputSuggestion>
       </FormControl>

@@ -9,7 +9,7 @@ import {
   MdFormatAlignJustify,
 } from 'react-icons/md'
 import FormControl from '~components/inspector/controls/FormControl'
-import { ComboboxOption } from '@reach/combobox'
+import { Combobox } from '@headlessui/react'
 import InputSuggestion from '~components/inspector/inputs/InputSuggestion'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
@@ -106,7 +106,7 @@ const TextPanel = () => {
           name="fontSize"
         >
           {Object.keys(theme.fontSizes).map(option => (
-            <ComboboxOption key={option} value={option} />
+            <Combobox.Option key={option} value={option} />
           ))}
         </InputSuggestion>
       </FormControl>
@@ -120,7 +120,7 @@ const TextPanel = () => {
           name="lineHeight"
         >
           {Object.keys(theme.lineHeights).map(option => (
-            <ComboboxOption key={option} value={option} />
+            <Combobox.Option key={option} value={option} />
           ))}
         </InputSuggestion>
       </FormControl>
@@ -132,7 +132,7 @@ const TextPanel = () => {
           name="letterSpacing"
         >
           {Object.keys(theme.letterSpacings).map(option => (
-            <ComboboxOption key={option} value={option} />
+            <Combobox.Option key={option} value={option} />
           ))}
         </InputSuggestion>
       </FormControl>

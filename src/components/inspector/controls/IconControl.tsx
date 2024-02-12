@@ -4,7 +4,7 @@ import FormControl from './FormControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 import InputSuggestion from '~components/inspector/inputs/InputSuggestion'
-import { ComboboxOption, ComboboxOptionText } from '@reach/combobox'
+import { Combobox } from '@headlessui/react'
 import icons from '~iconsList'
 
 type IconControlProps = {
@@ -28,13 +28,12 @@ const IconControl: React.FC<IconControlProps> = ({ name, label }) => {
           .map((icon, index) => {
             const IconComponent = icons[icon]
             return (
-              <ComboboxOption key={index} value={icon}>
+              <Combobox.Option key={index} value={icon}>
                 <IconComponent
                   // @ts-ignore
                   path=""
                 />
-                <ComboboxOptionText />
-              </ComboboxOption>
+              </Combobox.Option>
             )
           })}
       </InputSuggestion>

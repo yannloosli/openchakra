@@ -2,7 +2,7 @@ import React from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@chakra-ui/theme'
 import 'react-color-picker/index.css'
-import '@reach/combobox/styles.css'
+import 'split-pane-react/esm/themes/default.css';
 
 import { wrapper } from '~core/store'
 import { ErrorBoundary as BugsnagErrorBoundary } from '~utils/bugsnag'

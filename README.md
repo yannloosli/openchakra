@@ -9,6 +9,8 @@ OpenChakra is a visual editor for the best component library in town: [Chakra UI
 
 👉 [https://openchakra.app](https://openchakra.app)
 
+**Note:** Forked from https://github.com/premieroctet/openchakra - which is not currently maintained.
+
 ## Features
 
 - 🎨 Drag and drop [Chakra UI](https://chakra-ui.com/getting-started) components
@@ -22,6 +24,13 @@ OpenChakra is a visual editor for the best component library in town: [Chakra UI
 [![Screenshot](./public/images/screenshot.png)](https://openchakra.app)
 
 ## Getting started
+
+### Install and Run Locally
+Follow the following steps to get this up and running locally:
+1. Install dependencies: `npm install`
+1. Run dev server locally `npm run dev`
+
+OpenChakra will be running on `localhost`!
 
 ### Builder mode
 
@@ -86,28 +95,6 @@ This project is being developed by [Premier Octet](https://www.premieroctet.com)
 
 ### Code Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
-<a href="https://github.com/premieroctet/openchakra/graphs/contributors"><img src="https://opencollective.com/openchakra/contributors.svg?width=890&button=false" /></a>
+This project exists thanks to all the people from `premieroctet/openchakra` who originally created and supported this project. 
 
-### Financial Contributors
-
-Become a financial contributor and help us sustain our community. [[Contribute](https://opencollective.com/openchakra/contribute)]
-
-#### Individuals
-
-<a href="https://opencollective.com/openchakra"><img src="https://opencollective.com/openchakra/individuals.svg?width=890"></a>
-
-#### Organizations
-
-Support this project with your organization. Your logo will show up here with a link to your website. [[Contribute](https://opencollective.com/openchakra/contribute)]
-
-<a href="https://opencollective.com/openchakra/organization/0/website"><img src="https://opencollective.com/openchakra/organization/0/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/1/website"><img src="https://opencollective.com/openchakra/organization/1/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/2/website"><img src="https://opencollective.com/openchakra/organization/2/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/3/website"><img src="https://opencollective.com/openchakra/organization/3/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/4/website"><img src="https://opencollective.com/openchakra/organization/4/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/5/website"><img src="https://opencollective.com/openchakra/organization/5/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/6/website"><img src="https://opencollective.com/openchakra/organization/6/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/7/website"><img src="https://opencollective.com/openchakra/organization/7/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/8/website"><img src="https://opencollective.com/openchakra/organization/8/avatar.svg"></a>
-<a href="https://opencollective.com/openchakra/organization/9/website"><img src="https://opencollective.com/openchakra/organization/9/avatar.svg"></a>
+New collaborators are welcome! [[Contribute](CONTRIBUTING.md)].

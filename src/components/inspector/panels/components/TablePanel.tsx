@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
 import { Select } from '@chakra-ui/react'
 import FormControl from '~components/inspector/controls/FormControl'
+import ColorsControl from '~components/inspector/controls/ColorsControl'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 
@@ -24,6 +25,7 @@ const TablePanel = () => {
           <option>lg</option>
         </Select>
       </FormControl>
+      <ColorsControl label="Color Scheme" name="colorScheme" />
 
       <FormControl label="Variant" htmlFor="variant">
         <Select

@@ -107,6 +107,7 @@ import {
     RangeSliderProps,
     RangeSliderTrackProps,
     RangeSliderThumbProps,
+    GridItemProps,
 } from '@chakra-ui/react'
 
 import iconsList from '~iconsList'

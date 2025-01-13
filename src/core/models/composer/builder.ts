@@ -468,7 +468,7 @@ export const buildPopover = (parent: string): ComposedComponent => {
         root: nodeId,
         parent,
     }
-}
+}  
 
 export const buildTag = (parent: string): ComposedComponent => {
     const composer = new Composer()

@@ -15,10 +15,11 @@ import {
 } from '@chakra-ui/react'
 
 interface Props {
-  component: IComponent
+  component: IComponent,
+  index: number
 }
 
-const PopoverPreview = ({ component }: Props) => {
+const PopoverPreview = ({ component, index }: Props) => {
   const { drop, isOver } = useDropComponent(component.id)
   const { props, ref } = useInteractive(component, true)
 
@@ -28,7 +29,7 @@ const PopoverPreview = ({ component }: Props) => {
   let prop = { ...props }
   delete prop['isOpen']
   return (
-    <Popover isOpen={props.showpreview} ref={drop(ref)} {...prop}>
+    <Popover isOpen={props.showpreview} ref={drop(ref)} index={index} {...prop}>
       <div>
         {component.children
           .filter((key: string, index: number) => index === 0)

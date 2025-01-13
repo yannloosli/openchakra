@@ -4,8 +4,9 @@ import ComponentPreview from '~components/editor/ComponentPreview'
 import { useDropComponent } from '~hooks/useDropComponent'
 import { useInteractive } from '~hooks/useInteractive'
 
-const SkeletonPreview: React.FC<{ component: IComponent }> = ({
+const SkeletonPreview: React.FC<{ component: IComponent, index: number }> = ({
   component,
+  index
 }) => {
   const { drop, isOver } = useDropComponent(component.id)
   const { props, ref } = useInteractive(component, true, true)
@@ -55,7 +56,7 @@ export const SkeletonCirclePreview = ({ component }: IPreviewProps) => {
   }
 
   return (
-    <Box display="inline-block" ref={drop(ref)} {...props}>
+    <Box display="inline-block" ref={drop(ref)} index={index} {...props}>
       <SkeletonCircle {...component.props}>
         {component.children.map((key: string) => (
           <ComponentPreview key={key} componentName={key} />

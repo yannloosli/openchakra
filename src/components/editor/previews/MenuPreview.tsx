@@ -18,9 +18,10 @@ import icons from '~iconsList'
 
 interface Props {
     component: IComponent
+    index: number
 }
 
-const MenuPreview = ({ component }: Props) => {
+const MenuPreview = ({ component, index }: Props) => {
     const { drop, isOver } = useDropComponent(component.id)
     const { props, ref } = useInteractive(component, true)
     let prop = { ...props }
@@ -30,7 +31,7 @@ const MenuPreview = ({ component }: Props) => {
         props.bg = 'teal.50'
     }
     return (
-        <Box ref={drop(ref)} {...props}>
+        <Box ref={drop(ref)} index={index} {...props}>
             <Menu isOpen={props.showpreview} {...prop}>
                 {component.children.map((key: string) => (
                     <ComponentPreview key={key} componentName={key} />

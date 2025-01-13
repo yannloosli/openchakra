@@ -21,7 +21,7 @@ const ResponsiveToolBar = () => {
       align="center"
       justify="center"
       position="absolute"
-      zIndex={10}
+      zIndex={5}
       boxShadow="lg"
     >
       <IconButton

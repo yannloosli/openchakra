@@ -5,6 +5,7 @@ export const secretchakra: IComponents = {
     type: 'Box',
     children: ['comp-root'],
     props: {},
+    params: [],
   },
   'comp-root': {
     id: 'comp-root',

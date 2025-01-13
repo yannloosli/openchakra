@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { IconButton, ButtonGroup, useTheme } from '@chakra-ui/react'
+import { IconButton, ButtonGroup, theme, Select } from '@chakra-ui/react'
 import ColorsControl from '~components/inspector/controls/ColorsControl'
 import { GoBold, GoItalic } from 'react-icons/go'
 import {
@@ -9,14 +9,13 @@ import {
   MdFormatAlignJustify,
 } from 'react-icons/md'
 import FormControl from '~components/inspector/controls/FormControl'
-import { Combobox } from '@headlessui/react'
+import { ComboboxOption } from '@reach/combobox'
 import InputSuggestion from '~components/inspector/inputs/InputSuggestion'
 import { useForm } from '~hooks/useForm'
 import usePropsSelector from '~hooks/usePropsSelector'
 
 const TextPanel = () => {
   const { setValue, setValueFromEvent } = useForm()
-  const theme = useTheme()
 
   const fontWeight = usePropsSelector('fontWeight')
   const fontStyle = usePropsSelector('fontStyle')
@@ -27,7 +26,39 @@ const TextPanel = () => {
 
   return (
     <>
-      <FormControl label="Style">
+      <FormControl label="Font Weight" htmlFor="fontWeight">
+        <Select
+          name="fontWeight"
+          size="sm"
+          value={fontWeight || 'normal'}
+          onChange={setValueFromEvent}
+        >
+          <option>hairline</option>
+          <option>thin</option>
+          <option>light</option>
+          <option>normal</option>
+          <option>medium</option>
+          <option>semibold</option>
+          <option>bold</option>
+          <option>extrabold</option>
+          <option>black</option>
+        </Select>
+      </FormControl>
+      <FormControl label="Font Style" htmlFor="fontStyle">
+        <Select
+          name="fontStyle"
+          size="sm"
+          value={fontStyle || 'normal'}
+          onChange={setValueFromEvent}
+        >
+          <option>italic</option>
+          <option>normal</option>
+          <option>inherit</option>
+          <option>initial</option>
+        </Select>
+      </FormControl>
+      {/* Added more options in drop down and removed only Bold & Italic options */}
+      {/* <FormControl label="Style">
         <IconButton
           mr={1}
           aria-label="bold"
@@ -53,9 +84,9 @@ const TextPanel = () => {
         >
           Italic
         </IconButton>
-      </FormControl>
+      </FormControl> */}
 
-      <FormControl label="Text align">
+      <FormControl label="Text align" htmlFor="textAlign">
         <ButtonGroup size="xs" isAttached>
           <IconButton
             aria-label="bold"
@@ -106,7 +137,7 @@ const TextPanel = () => {
           name="fontSize"
         >
           {Object.keys(theme.fontSizes).map(option => (
-            <Combobox.Option key={option} value={option} />
+            <ComboboxOption key={option} value={option} />
           ))}
         </InputSuggestion>
       </FormControl>
@@ -120,7 +151,7 @@ const TextPanel = () => {
           name="lineHeight"
         >
           {Object.keys(theme.lineHeights).map(option => (
-            <Combobox.Option key={option} value={option} />
+            <ComboboxOption key={option} value={option} />
           ))}
         </InputSuggestion>
       </FormControl>
@@ -132,7 +163,7 @@ const TextPanel = () => {
           name="letterSpacing"
         >
           {Object.keys(theme.letterSpacings).map(option => (
-            <Combobox.Option key={option} value={option} />
+            <ComboboxOption key={option} value={option} />
           ))}
         </InputSuggestion>
       </FormControl>

@@ -5,9 +5,10 @@ import {
   SliderFilledTrack,
   SliderThumb,
   Box,
-  Slider,
   Flex,
+  Slider,
 } from '@chakra-ui/react'
+import ParamSelector from '~custom-components/paramSelector'
 
 type HuesPickerPropType = {
   name: string
@@ -37,6 +38,7 @@ const HuesPickerControl = (props: HuesPickerPropType) => {
 
   return (
     <>
+      <ParamSelector prop={props.name} />
       <Grid mb={2} templateColumns="repeat(5, 1fr)" gap={0}>
         {Object.keys(props.themeColors).map(colorName =>
           props.gradient ? (
@@ -77,6 +79,7 @@ const HuesPickerControl = (props: HuesPickerPropType) => {
           ),
         )}
       </Grid>
+
       {props.enableHues && (
         <Slider
           onChange={value => {

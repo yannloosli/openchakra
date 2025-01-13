@@ -20,6 +20,7 @@ import {
   PopoverFooter,
   Tooltip,
   HStack,
+  Spacer,
 } from '@chakra-ui/react'
 import { ExternalLinkIcon, SmallCloseIcon, CheckIcon } from '@chakra-ui/icons'
 import { DiGithubBadge } from 'react-icons/di'
@@ -30,17 +31,28 @@ import { generateCode } from '~utils/code'
 import useDispatch from '~hooks/useDispatch'
 import { useSelector } from 'react-redux'
 import { getComponents } from '~core/selectors/components'
+import {
+  getCustomComponents,
+  getInstalledComponents,
+} from '~core/selectors/customComponents'
 import { getShowLayout, getShowCode } from '~core/selectors/app'
 import HeaderMenu from '~components/headerMenu/HeaderMenu'
 import { FaReact } from 'react-icons/fa'
+import Themer from './themer/Themer'
 
 const CodeSandboxButton = () => {
   const components = useSelector(getComponents)
+  const componentsList = useSelector(getCustomComponents)
+  const installedComponentsList = useSelector(getInstalledComponents)
   const [isLoading, setIsLoading] = useState(false)
 
   const exportToCodeSandbox = async (isTypeScript: boolean) => {
     setIsLoading(true)
-    const code = await generateCode(components)
+    const code = await generateCode(
+      components,
+      componentsList,
+      installedComponentsList,
+    )
     setIsLoading(false)
     const parameters = buildParameters(code, isTypeScript)
 
@@ -120,6 +132,7 @@ const Header = () => {
   return (
     <DarkMode>
       <Flex
+        className="header"
         justifyContent="space-between"
         bg="#1a202c"
         as="header"
@@ -179,17 +192,27 @@ const Header = () => {
             </FormControl>
 
             <FormControl display="flex" flexDirection="row" alignItems="center">
-              <FormLabel
-                color="gray.200"
+              <Tooltip
+                zIndex={100}
+                hasArrow
+                bg="yellow.100"
+                aria-label="Code Panel help"
+                fontFamily="sans-serif"
                 fontSize="xs"
-                mr={2}
-                mb={0}
-                htmlFor="code"
-                pb={0}
-                whiteSpace="nowrap"
+                label="Code Panel shows the generated code for the current component"
               >
-                Code panel
-              </FormLabel>
+                <FormLabel
+                  color="gray.200"
+                  fontSize="xs"
+                  mr={2}
+                  mb={0}
+                  htmlFor="code"
+                  pb={0}
+                  whiteSpace="nowrap"
+                >
+                  Code panel
+                </FormLabel>
+              </Tooltip>
               <LightMode>
                 <Switch
                   isChecked={showCode}
@@ -201,7 +224,8 @@ const Header = () => {
               </LightMode>
             </FormControl>
           </HStack>
-
+          <Themer />
+          <Spacer />
           <Stack direction="row">
             <CodeSandboxButton />
             <Popover>

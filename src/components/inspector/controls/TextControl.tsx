@@ -36,6 +36,9 @@ const TextControl: React.FC<TextControlPropsType> = ({
         width={hasColumn ? '3rem' : '100%'}
         placeholder={placeholder}
         onChange={setValueFromEvent}
+        _placeholder={{
+          color: 'gray',
+        }}
       />
     </FormControl>
   )

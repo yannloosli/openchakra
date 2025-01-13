@@ -13,10 +13,27 @@ import {
   AvatarProps,
   CheckboxProps,
   LinkProps,
+  MenuProps,
+  MenuButtonProps,
+  MenuListProps,
+  MenuItemProps,
+  MenuItemOptionProps,
+  MenuGroupProps,
+  MenuOptionGroupProps,
+  MenuDividerProps,
+  PopoverProps,
+  PopoverContentProps,
+  PopoverHeaderProps,
+  PopoverBodyProps,
+  PopoverFooterProps,
+  PopoverArrowProps,
+  PopoverCloseButtonProps,
   SpinnerProps,
   CloseButtonProps,
   HeadingProps,
   TagProps,
+  TagLabelProps,
+  TagCloseButtonProps,
   SimpleGridProps,
   SwitchProps,
   AlertProps,
@@ -34,7 +51,10 @@ import {
   AspectRatioProps,
   BreadcrumbItemProps,
   EditableProps,
-  MenuProps,
+  SliderProps,
+  SliderTrackProps,
+  SliderThumbProps,
+  SliderMarkProps,
   NumberInputProps,
   RadioProps,
   SelectProps,
@@ -67,12 +87,29 @@ import {
   StatNumberProps,
   StatArrowProps,
   SkeletonProps,
-  SliderProps,
-  SliderTrackProps,
-  SliderThumbProps,
+  TableContainerProps,
+  TableProps,
+  TableCaptionProps,
+  TableBodyProps,
+  TableRowProps,
+  TableFooterProps,
+  TableHeadProps,
+  TooltipProps,
+  TableColumnHeaderProps,
+  TableCellProps,
+  ModalProps,
+  ModalOverlayProps,
+  ModalContentProps,
+  ModalHeaderProps,
+  ModalFooterProps,
+  ModalBodyProps,
+  RangeSliderProps,
+  RangeSliderTrackProps,
+  RangeSliderThumbProps,
 } from '@chakra-ui/react'
 
 import iconsList from '~iconsList'
+import { AddIcon } from '@chakra-ui/icons'
 
 type PropsWithForm<T> = T & { form?: T }
 
@@ -98,7 +135,20 @@ type PreviewDefaultProps = {
   CircularProgress?: PropsWithForm<CircularProgressProps>
   Heading?: PropsWithForm<HeadingProps>
   Highlight?: PropsWithForm<HighlightProps>
+  Popover?: PropsWithForm<PopoverProps>
+  PopoverTrigger?: PropsWithForm<any>
+  PopoverContent?: PropsWithForm<PopoverContentProps>
+  PopoverHeader?: PropsWithForm<PopoverHeaderProps>
+  PopoverBody?: PropsWithForm<PopoverBodyProps>
+  PopoverFooter?: PropsWithForm<PopoverFooterProps>
+  PopoverArrow?: PropsWithForm<PopoverArrowProps>
+  PopoverCloseButton?: PropsWithForm<PopoverCloseButtonProps>
+  PopoverAnchor?: PropsWithForm<any>
   Tag?: PropsWithForm<TagProps>
+  TagLabel?: PropsWithForm<TagLabelProps>
+  TagLeftIcon?: PropsWithForm<any>
+  TagRightIcon?: PropsWithForm<any>
+  TagCloseButton?: PropsWithForm<TagCloseButtonProps>
   SimpleGrid?: PropsWithForm<SimpleGridProps>
   Switch?: PropsWithForm<SwitchProps>
   Alert?: PropsWithForm<AlertProps>
@@ -140,7 +190,19 @@ type PreviewDefaultProps = {
   BreadcrumbItem?: PropsWithForm<BreadcrumbItemProps>
   BreadcrumbLink?: PropsWithForm<BreadcrumbLinkProps>
   Editable?: PropsWithForm<EditableProps>
+  Slider?: PropsWithForm<SliderProps>
+  SliderTrack?: PropsWithForm<SliderTrackProps>
+  SliderFilledTrack?: PropsWithForm<any>
+  SliderThumb?: PropsWithForm<SliderThumbProps>
+  SliderMark?: PropsWithForm<SliderMarkProps>
   Menu?: PropsWithForm<MenuProps>
+  MenuButton?: PropsWithForm<MenuButtonProps>
+  MenuList?: PropsWithForm<MenuListProps>
+  MenuItem?: PropsWithForm<MenuItemProps>
+  MenuItemOption?: PropsWithForm<MenuItemOptionProps>
+  MenuGroup?: PropsWithForm<MenuGroupProps>
+  MenuOptionGroup?: PropsWithForm<MenuOptionGroupProps>
+  Tooltip?: PropsWithForm<TooltipProps>
   NumberInput?: PropsWithForm<NumberInputProps>
   Radio?: PropsWithForm<RadioProps>
   RadioGroup?: PropsWithForm<RadioGroupProps>
@@ -153,16 +215,33 @@ type PreviewDefaultProps = {
   Skeleton?: PropsWithForm<SkeletonProps>
   SkeletonCircle?: PropsWithForm<SkeletonProps>
   SkeletonText?: PropsWithForm<SkeletonProps>
-  Slider?: PropsWithForm<SliderProps>
-  SliderTrack?: PropsWithForm<SliderTrackProps>
-  SliderFilledTrack?: PropsWithForm<any>
-  SliderThumb?: PropsWithForm<SliderThumbProps>
+  TableContainer?: PropsWithForm<TableContainerProps>
+  Table?: PropsWithForm<TableProps>
+  TableCaption?: PropsWithForm<TableCaptionProps>
+  Tr?: PropsWithForm<TableRowProps>
+  // Td?: PropsWithForm<TableCellProps>
+  // Th?: PropsWithForm<TableColumnHeaderProps>
+  TBody?: PropsWithForm<TableBodyProps>
+  THead?: PropsWithForm<TableHeadProps>
+  TFoot?: PropsWithForm<TableFooterProps>
+  Modal?: PropsWithForm<ModalProps>
+  ModalOverlay?: PropsWithForm<ModalOverlayProps>
+  ModalContent?: PropsWithForm<ModalContentProps>
+  ModalHeader?: PropsWithForm<ModalHeaderProps>
+  ModalFooter?: PropsWithForm<ModalFooterProps>
+  ModalBody?: PropsWithForm<ModalBodyProps>
+  ModalCloseButton?: PropsWithForm<any>
+  RangeSlider?: PropsWithForm<RangeSliderProps>
+  RangeSliderTrack?: PropsWithForm<RangeSliderTrackProps>
+  RangeSliderFilledTrack?: PropsWithForm<any>
+  RangeSliderThumb?: PropsWithForm<RangeSliderThumbProps>
 }
 
-export const DEFAULT_PROPS: PreviewDefaultProps = {
+export const DEFAULT_PROPS: PreviewDefaultProps | any = {
   AlertDescription: {
     children: 'Alert description',
   },
+  AccordionPanel: { showpreview: true },
   AlertTitle: {
     children: 'Alert title',
     mr: 1,
@@ -265,6 +344,30 @@ export const DEFAULT_PROPS: PreviewDefaultProps = {
   },
   ListItem: { children: 'list' },
   Kbd: { children: 'shift' },
+  Menu: {},
+  MenuButton: { as: 'Button', children: 'Menu Button' },
+  MenuList: {},
+  MenuItem: { children: 'My Account' },
+  MenuItemOption: { value: 'asc', children: 'Ascending' },
+  MenuGroup: { title: 'Profile' },
+  MenuOptionGroup: { title: 'Order', type: 'radio' },
+  MenuDivider: {},
+  Modal: { size: 'md' },
+  ModalOverlay: {},
+  ModalContent: {},
+  ModalHeader: { children: 'Modal Title' },
+  ModalFooter: {},
+  ModalBody: {},
+  ModalCloseButton: {},
+  Popover: {},
+  PopoverTrigger: {},
+  PopoverContent: {},
+  PopoverHeader: { children: 'Popover Title' },
+  PopoverBody: { children: 'This is the body of my popover' },
+  PopoverFooter: {},
+  PopoverArrow: {},
+  PopoverCloseButton: {},
+  PopoverAnchor: {},
   Progress: {
     value: 60,
     min: 0,
@@ -293,9 +396,9 @@ export const DEFAULT_PROPS: PreviewDefaultProps = {
     spacingY: 1,
   },
   Slider: {
-    step: 1,
-    size: 'md',
-    value: 50,
+    // step: 1,
+    // size: 'md',
+    // value: 70,
     min: 1,
     max: 100,
     'aria-label': 'slider',
@@ -303,6 +406,16 @@ export const DEFAULT_PROPS: PreviewDefaultProps = {
   SliderFilledTrack: {},
   SliderThumb: {},
   SliderTrack: {},
+  SliderMark: { children: '95%', value: 95 },
+  RangeSlider: {
+    min: 1,
+    max: 100,
+  },
+  RangeSliderFilledTrack: {},
+  RangeSliderThumb: {
+    index: '0',
+  },
+  RangeSliderTrack: {},
   Stack: {
     spacing: 2,
     form: {
@@ -342,17 +455,28 @@ export const DEFAULT_PROPS: PreviewDefaultProps = {
     isChecked: false,
   },
   Tab: { children: 'Tab' },
-  Tabs: { children: '', size: 'md' },
+  Tabs: { children: '', size: 'md', variant: 'line' },
   TabPanel: { children: 'Tab' },
-  Tag: {
-    children: 'Tag name',
-  },
+  Tag: { rounded: 'full', variant: 'subtle' },
+  TagLabel: { children: 'Tag name' },
+  TagLeftIcon: { as: 'AddIcon' },
+  TagRightIcon: { as: 'AddIcon' },
+  TagCloseButton: {},
   Text: { children: 'Text value' },
+  Td: { children: 'data', isNumeric: false },
+  Th: { children: 'heading', isNumeric: false },
+  TableCaption: { children: 'Table Caption', placement: 'bottom' },
+  Table: { variant: 'simple' },
+  Conditional: { condition: false },
+  Loop: { list: [1, 2, 3, 4] },
+  Tooltip: { label: 'This is my label', 'aria-label': 'beautiful tooltip' },
 }
 
 export const getDefaultFormProps = (type: ComponentType) => {
   //@ts-ignore
-  const chakraDefaultProps = Chakra[type].defaultProps
+  let chakraDefaultProps = []
+  //@ts-ignore
+  if (!!Chakra[type]) chakraDefaultProps = Chakra[type].defaultProps
   // @ts-ignore
   return { ...chakraDefaultProps, ...DEFAULT_PROPS[type]?.form }
 }

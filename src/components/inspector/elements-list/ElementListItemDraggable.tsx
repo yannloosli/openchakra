@@ -56,7 +56,7 @@ const ElementListItemDraggable: React.FC<Props> = ({
   })
   const [{ isDragging }, drag] = useDrag({
     type: ITEM_TYPE,
-    item: { type: ITEM_TYPE, id, index },
+    item: { id, type: ITEM_TYPE, index },
     collect: monitor => ({
       isDragging: monitor.isDragging(),
     }),

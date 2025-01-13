@@ -1,5 +1,4 @@
-import React, { memo } from 'react'
-
+import React, { memo, lazy, Suspense, useState, useEffect } from 'react'
 import ButtonPanel from '~components/inspector/panels/components/ButtonPanel'
 import BadgePanel from '~components/inspector/panels/components/BadgePanel'
 import IconPanel from '~components/inspector/panels/components/IconPanel'
@@ -14,6 +13,9 @@ import IconButtonPanel from '~components/inspector/panels/components/IconButtonP
 import ProgressPanel from '~components/inspector/panels/components/ProgressPanel'
 import LinkPanel from '~components/inspector/panels/components/LinkPanel'
 import SpinnerPanel from '~components/inspector/panels/components/SpinnerPanel'
+import PopoverContentPanel from './components/PopoverContentPanel'
+import PopoverPanel from './components/PopoverPanel'
+import AccordionPanelPanel from './components/AccordionPanelPanel'
 import CloseButtonPanel from '~components/inspector/panels/components/CloseButtonPanel'
 import DividerPanel from '~components/inspector/panels/components/DividerPanel'
 import CodePanel from '~components/inspector/panels/components/CodePanel'
@@ -21,6 +23,8 @@ import TextareaPanel from '~components/inspector/panels/components/TextareaPanel
 import CircularProgressPanel from '~components/inspector/panels/components/CircularProgressPanel'
 import HeadingPanel from '~components/inspector/panels/components/HeadingPanel'
 import TagPanel from '~components/inspector/panels/components/TagPanel'
+import TagLabelPanel from './components/TagLabelPanel'
+import TagIconPanel from './components/TagIconPanel'
 import SimpleGridPanel from '~components/inspector/panels/components/SimpleGridPanel'
 import SwitchPanel from '~components/inspector/panels/components/SwitchPanel'
 import AlertPanel from '~components/inspector/panels/components/AlertPanel'
@@ -49,21 +53,85 @@ import AspectRatioPanel from '~components/inspector/panels/components/AspectRati
 import BreadcrumbPanel from '~components/inspector/panels/components/BreadcrumbPanel'
 import BreadcrumbItemPanel from '~components/inspector/panels/components/BreadcrumbItemPanel'
 import HighlightPanel from '~components/inspector/panels/components/HighlightPanel'
-import KbdPanel from '~components/inspector/panels/components/KbdPanel'
-import TabPanel from '~components/inspector/panels/components/TabPanel'
-import StatArrowPanel from '~components/inspector/panels/components//StatArrowPanel'
-import StatLabelPanel from '~components/inspector/panels/components/StatLabelPanel'
-import SkeletonPanel from '~components/inspector/panels/components/SkeletonPanel'
+import KbdPanel from './components/KbdPanel'
+import TabPanel from './components/TabPanel'
+import StatArrowPanel from './components/StatArrowPanel'
+import StatLabelPanel from './components/StatLabelPanel'
+import SkeletonPanel from './components/SkeletonPanel'
+import RangeSliderPanel from '~components/inspector/panels/components/RangeSliderPanel'
+import TablePanel from './components/TablePanel'
+import ConditionalPanel from './components/ConditionalPanel'
+import LoopPanel from './components/LoopPanel'
+import { useSelector } from 'react-redux'
+import { getCustomComponentNames } from '~core/selectors/customComponents'
+import { convertToPascal } from '~components/editor/Editor'
+import TdPanel from './components/TdPanel'
+import TableCaptionPanel from './components/TableCaptionPanel'
+import ModalPanel from './components/ModalPanel'
+import ModalHeaderPanel from './components/ModalHeaderPanel'
+import TooltipPanel from './components/TooltipPanel'
+import MenuPanel from './components/MenuPanel'
+import MenuItemOptionsPanel from './components/MenuItemOptionsPanel'
+import MenuOptionsGroupPanel from './components/MenuOptionsGroupPanel'
+import MenuGroupPanel from './components/MenuGroupPanel'
+import MenuItemPanel from './components/MenuItemPanel'
+import MenuButtonPanel from './components/MenuButtonPanel'
 import SliderPanel from '~components/inspector/panels/components/SliderPanel'
+import SliderMarkPanel from './components/SliderMarkPanel'
 
-const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
-  component,
-  isRoot,
-}) => {
+const importView = (component: string, isInstalled: boolean = false) => {
+  if (isInstalled) {
+    return lazy(() =>
+      import(`src/installed-components/${component}Panel.ic.tsx`).catch(() =>
+        import('src/custom-components/fallback'),
+      ),
+    )
+  }
+  component = convertToPascal(component)
+  return lazy(() =>
+    import(
+      `src/custom-components/inspector/panels/components/${component}Panel.oc.tsx`
+    ).catch(() => import('src/custom-components/fallback')),
+  )
+}
+
+const Panels: React.FC<{
+  component: IComponent
+  isRoot: boolean
+  isCustom?: boolean
+  isInstalled?: boolean
+}> = ({ component, isRoot, isCustom = false, isInstalled = false }) => {
   const { type } = component
+  const [view, setView] = useState<any>()
+  const customComponents = useSelector(getCustomComponentNames)
+  const [instView, setInstView] = useState<any>()
+
+  useEffect(() => {
+    async function loadViews() {
+      if (type) {
+        const View = importView(type)
+        const InstView = importView(type, true)
+        await Promise.all([View, InstView])
+        const loadedPanel = <View />
+        const iLoadedPanel = <InstView />
+        Promise.all([loadedPanel, iLoadedPanel])
+        setView(loadedPanel)
+        setInstView(iLoadedPanel)
+      }
+    }
+    loadViews()
+  }, [customComponents])
 
   if (isRoot) {
     return null
+  }
+
+  if (isCustom) {
+    return <Suspense fallback={'Loading...'}>{view}</Suspense>
+  }
+
+  if (isInstalled) {
+    return <Suspense fallback={'Loading...'}>{instView}</Suspense>
   }
 
   return (
@@ -96,6 +164,9 @@ const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
       {type === 'AlertTitle' && <AlertTitlePanel />}
       {type === 'AlertDescription' && <AlertDescriptionPanel />}
       {type === 'Tag' && <TagPanel />}
+      {type === 'TagLabel' && <TagLabelPanel />}
+      {type === 'TagLeftIcon' && <TagIconPanel />}
+      {type === 'TagRightIcon' && <TagIconPanel />}
       {type === 'Flex' && <FlexPanel />}
       {type === 'Stack' && <StackPanel />}
       {type === 'FormControl' && <FormControlPanel />}
@@ -113,6 +184,7 @@ const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
       {type === 'ListIcon' && <ListIconPanel />}
       {type === 'Accordion' && <AccordionPanel />}
       {type === 'AccordionItem' && <AccordionItemPanel />}
+      {type === 'AccordionPanel' && <AccordionPanelPanel />}
       {type === 'FormLabel' && <FormLabelPanel />}
       {type === 'FormHelperText' && <FormHelperTextPanel />}
       {type === 'FormErrorMessage' && <FormErrorMessagePanel />}
@@ -128,7 +200,27 @@ const Panels: React.FC<{ component: IComponent; isRoot: boolean }> = ({
       {type === 'StatArrow' && <StatArrowPanel />}
       {type === 'StatLabel' && <StatLabelPanel />}
       {type === 'StatNumber' && <StatLabelPanel />}
+      {type === 'RangeSlider' && <RangeSliderPanel />}
+      {type === 'Table' && <TablePanel />}
+      {type === 'TableCaption' && <TableCaptionPanel />}
+      {type === 'Td' && <TdPanel />}
+      {type === 'Th' && <TdPanel />}
+      {type === 'Conditional' && <ConditionalPanel />}
+      {type === 'Loop' && <LoopPanel />}
+      {type === 'Modal' && <ModalPanel />}
+      {type === 'ModalHeader' && <ModalHeaderPanel />}
+      {type === 'Tooltip' && <TooltipPanel />}
+      {type === 'Popover' && <PopoverPanel />}
+      {type === 'PopoverHeader' && <PopoverContentPanel />}
+      {type === 'PopoverBody' && <PopoverContentPanel />}
+      {type === 'Menu' && <MenuPanel />}
+      {type === 'MenuItemOption' && <MenuItemOptionsPanel />}
+      {type === 'MenuOptionGroup' && <MenuOptionsGroupPanel />}
+      {type === 'MenuGroup' && <MenuGroupPanel />}
+      {type === 'MenuItem' && <MenuItemPanel />}
+      {type === 'MenuButton' && <MenuButtonPanel />}
       {type === 'Slider' && <SliderPanel />}
+      {type === 'SliderMark' && <SliderMarkPanel />}
     </>
   )
 }

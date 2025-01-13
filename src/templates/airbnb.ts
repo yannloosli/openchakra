@@ -5,6 +5,7 @@ export const airbnbCard: IComponents = {
     type: 'Box',
     children: ['comp-1580479567'],
     props: {},
+    params: []
   },
   'comp-root': {
     id: 'comp-root',

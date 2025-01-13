@@ -1,111 +1,137 @@
-import React, { memo, useState } from 'react'
-import { Box, Text, Link } from '@chakra-ui/react'
+import React, { memo, useState, useEffect } from 'react'
+import { Box, Text, Link, theme as baseTheme, ChakraProvider } from '@chakra-ui/react'
 import { useDropComponent } from '~hooks/useDropComponent'
 import SplitPane, { Pane } from 'split-pane-react'
 import CodePanel from '~components/CodePanel'
 import { useSelector } from 'react-redux'
 import useDispatch from '~hooks/useDispatch'
 import { getComponents } from '~core/selectors/components'
+import { getNewTheme } from '~core/selectors/customComponents'
 import { getShowLayout, getShowCode } from '~core/selectors/app'
 import ComponentPreview from '~components/editor/ComponentPreview'
+import { omit } from 'lodash'
+import myTheme from './myTheme'
+import Fonts from '~components/Fonts'
+
+export const themeColors: any = Object.keys(
+    omit(baseTheme.colors, ['transparent', 'current', 'black', 'white']),
+)
 
 export const gridStyles = {
-  backgroundImage:
-    'linear-gradient(to right, #d9e2e9 1px, transparent 1px),linear-gradient(to bottom, #d9e2e9 1px, transparent 1px);',
-  backgroundSize: '20px 20px',
-  bgColor: '#edf2f6',
-  p: 10,
+    backgroundImage:
+        'linear-gradient(to right, #d9e2e9 1px, transparent 1px),linear-gradient(to bottom, #d9e2e9 1px, transparent 1px);',
+    backgroundSize: '20px 20px',
+    bgColor: '#edf2f6',
+    p: 10,
+}
+
+export const convertToPascal = (filePath: string) => {
+    const fileName = filePath.split('/').slice(-1)[0]
+    let fileArray = fileName.split('-')
+    fileArray = fileArray.map(word => {
+        return `${word.slice(0, 1).toUpperCase()}${word.slice(1)}`
+    })
+    return fileArray.join('')
 }
 
 const Editor: React.FC = () => {
-  const [sizes, setSizes] = useState([100, '50%', 'auto']);
-  const showCode = useSelector(getShowCode)
-  const showLayout = useSelector(getShowLayout)
-  const components = useSelector(getComponents)
-  const dispatch = useDispatch()
+    const [sizes, setSizes] = useState([100, '50%', 'auto']);
+    const showCode = useSelector(getShowCode)
+    const showLayout = useSelector(getShowLayout)
+    const components = useSelector(getComponents)
+    const newThemeState = useSelector(getNewTheme)
+    const dispatch = useDispatch()
 
-  const { drop } = useDropComponent('root')
-  const isEmpty = !components.root.children.length
-  const rootProps = components.root.props
+    const { drop } = useDropComponent('root')
+    const isEmpty = !components.root.children.length
+    const rootProps = components.root.props
 
-  let editorBackgroundProps = {}
+    let editorBackgroundProps = {}
 
-  const onSelectBackground = () => {
-    dispatch.components.unselect()
-  }
+    const onSelectBackground = () => {
+        dispatch.components.unselect()
+    }
 
-  if (showLayout) {
-    editorBackgroundProps = gridStyles
-  }
+    if (showLayout) {
+        editorBackgroundProps = gridStyles
+    }
 
-  editorBackgroundProps = {
-    ...editorBackgroundProps,
-    ...rootProps,
-  }
+    editorBackgroundProps = {
+        ...editorBackgroundProps,
+        ...rootProps,
+    }
 
-  const Playground = (
-    <Box
-      p={2}
-      {...editorBackgroundProps}
-      height="100%"
-      sx={{
-        scrollbarColor: 'rgba(49, 151, 149, .7) transparent',
-      }}
-      minWidth="10rem"
-      width="100%"
-      display={isEmpty ? 'flex' : 'block'}
-      justifyContent="center"
-      alignItems="center"
-      overflow="auto"
-      ref={drop}
-      position="relative"
-      flexDirection="column"
-      onClick={onSelectBackground}
-    >
-      {isEmpty && (
-        <Text maxWidth="md" color="gray.400" fontSize="xl" textAlign="center">
-          Drag some component to start coding without code! Or load{' '}
-          <Link
-            color="gray.500"
-            onClick={(e: React.MouseEvent) => {
-              e.stopPropagation()
-              dispatch.components.loadDemo('onboarding')
-            }}
-            textDecoration="underline"
-          >
-            the onboarding components
-          </Link>
-          .
-        </Text>
-      )}
+    const Playground = (
+        <ChakraProvider theme={myTheme(newThemeState)} resetCSS={false}>
+            <Fonts
+                headingFontFamily={newThemeState.headingFontFamily}
+                bodyFontFamily={newThemeState.bodyFontFamily}
+            />
+            <Box
+                className="editor"
+                bg="chakra-body-bg"
+                p={2}
+                {...editorBackgroundProps}
+                height="100%"
+                sx={{
+                    scrollbarColor: 'rgba(49, 151, 149, .7) transparent',
+                }}
+                minWidth="10rem"
+                width="100%"
+                display={isEmpty ? 'flex' : 'block'}
+                justifyContent="center"
+                alignItems="center"
+                overflow="auto"
+                ref={drop}
+                position="relative"
+                flexDirection="column"
+                onClick={onSelectBackground}
+            >
+                {isEmpty && (
+                    <Text maxWidth="md" color="gray.400" fontSize="xl" textAlign="center">
+                        Drag some component to start coding without code! Or load{' '}
+                        <Link
+                            color="gray.500"
+                            onClick={(e: React.MouseEvent) => {
+                                e.stopPropagation()
+                                dispatch.components.loadDemo('onboarding')
+                            }}
+                            textDecoration="underline"
+                        >
+                            the onboarding components
+                        </Link>
+                        .
+                    </Text>
+                )}
 
-      {components.root.children.map((name: string) => (
-        <ComponentPreview key={name} componentName={name} />
-      ))}
-    </Box>
-  )
+                {components.root.children.map((name: string) => (
+                    <ComponentPreview key={name} componentName={name} />
+                ))}
+            </Box>
+        </ChakraProvider>
+    )
 
-  if (!showCode) {
-    return Playground
-  }
+    if (!showCode) {
+        return Playground
+    }
 
-  return (
-    // @ts-ignore
-    <SplitPane
-      split='vertical'
-      sizes={sizes}
-      onChange={setSizes}
-    >
-      <Pane minSize={50} maxSize='50%'>
-        <div>
-          {Playground}
-        </div>
-      </Pane>
-      <div>
-        <CodePanel />
-      </div>
-    </SplitPane>
-  );
+    return (
+        // @ts-ignore
+        <SplitPane
+            split='horizontal'
+            sizes={sizes}
+            onChange={setSizes}
+        >
+            <Pane minSize={50} maxSize='50%'>
+                <div>
+                    {Playground}
+                </div>
+            </Pane>
+            <div>
+                <CodePanel />
+            </div>
+        </SplitPane>
+    );
 }
 
 export default memo(Editor)

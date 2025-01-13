@@ -7,6 +7,7 @@ export const onboarding: IComponents = {
     props: {
       backgroundColor: 'gray.100',
     },
+    params: []
   },
   'comp-1580479567': {
     id: 'comp-1580479567',

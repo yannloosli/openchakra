@@ -54,7 +54,30 @@ type ComponentType =
   | 'ListIcon'
   | 'Kbd'
   | 'Menu'
+  | 'MenuButton'
+  | 'MenuList'
+  | 'MenuItem'
+  | 'MenuItemOption'
+  | 'MenuGroup'
+  | 'MenuOptionGroup'
+  | 'MenuDivider'
+  | 'Modal'
+  | 'ModalOverlay'
+  | 'ModalContent'
+  | 'ModalHeader'
+  | 'ModalFooter'
+  | 'ModalBody'
+  | 'ModalCloseButton'
   | 'NumberInput'
+  | 'Popover'
+  | 'PopoverTrigger'
+  | 'PopoverContent'
+  | 'PopoverHeader'
+  | 'PopoverBody'
+  | 'PopoverFooter'
+  | 'PopoverArrow'
+  | 'PopoverCloseButton'
+  | 'PopoverAnchor'
   | 'Progress'
   | 'Radio'
   | 'RadioGroup'
@@ -68,6 +91,11 @@ type ComponentType =
   | 'SliderTrack'
   | 'SliderFilledTrack'
   | 'SliderThumb'
+  | 'SliderMark'
+  | 'RangeSlider'
+  | 'RangeSliderTrack'
+  | 'RangeSliderFilledTrack'
+  | 'RangeSliderThumb'
   | 'Stack'
   | 'Stat'
   | 'StatLabel'
@@ -82,8 +110,23 @@ type ComponentType =
   | 'TabPanel'
   | 'TabPanels'
   | 'Tag'
+  | 'TagLabel'
+  | 'TagLeftIcon'
+  | 'TagRightIcon'
+  | 'TagCloseButton'
   | 'Text'
   | 'Textarea'
+  | 'Table'
+  | 'Thead'
+  | 'Tbody'
+  | 'Tfoot'
+  | 'Tr'
+  | 'Th'
+  | 'Td'
+  | 'TableCaption'
+  | 'TableContainer'
+  | 'Tooltip'
+  | string
 
 type MetaComponentType =
   | 'FormControlMeta'
@@ -94,7 +137,24 @@ type MetaComponentType =
   | 'BreadcrumbMeta'
   | 'TabsMeta'
   | 'StatMeta'
+  | 'TableMeta'
+  | 'TableRowMeta'
+  | 'ConditionalMeta'
+  | 'ModalMeta'
+  | 'TagMeta'
+  | 'PopoverMeta'
+  | 'MenuMeta'
   | 'SliderMeta'
+  | 'RangeSliderMeta'
+
+interface ParametersType {
+  name: string
+  value: any
+  type: string
+  optional: boolean
+  exposed: boolean
+  ref: boolean
+}
 
 interface IComponent {
   children: string[]
@@ -102,6 +162,7 @@ interface IComponent {
   parent: string
   id: string
   props: any
+  params?: Array<ParametersType>
   rootParentType?: ComponentType
   componentName?: string
 }
@@ -120,8 +181,11 @@ interface ComponentItemProps {
   type: ComponentType
   isMoved?: boolean
   isChild?: boolean
+  isSelected?: boolean
   isMeta?: boolean
+  isInstalled?: boolean
   soon?: boolean
+  custom?: boolean
   rootParentType?: ComponentType
   children?: React.ReactNode
 }

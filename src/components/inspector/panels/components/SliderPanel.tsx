@@ -17,6 +17,7 @@ const SliderPanel = () => {
   return (
     <>
       <TextControl name="value" label="Value" />
+      <TextControl name="defaultValue" label="Default Value" />
       <TextControl name="min" label="Min" />
       <TextControl name="max" label="Max" />
       <TextControl name="step" label="Step" />

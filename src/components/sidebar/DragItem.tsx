@@ -1,19 +1,30 @@
 import React from 'react'
 import { useDrag } from 'react-dnd'
-import { Text, Box } from '@chakra-ui/react'
-import { DragHandleIcon } from '@chakra-ui/icons'
+import { Text, Box, IconButton } from '@chakra-ui/react'
+import { DragHandleIcon, EditIcon } from '@chakra-ui/icons'
 
 const DragItem: React.FC<ComponentItemProps> = ({
   type,
   soon,
   label,
   isMeta,
+  isInstalled,
+  isSelected,
+  custom,
   isChild,
   rootParentType,
 }) => {
   const [, drag] = useDrag({
     type,
-    item: { id: type, type, isMeta, rootParentType },
+    item: {
+      id: type,
+      type,
+      isMeta,
+      isInstalled,
+      custom,
+      rootParentType,
+      isSelected,
+    },
   })
 
   let boxProps: any = {
@@ -21,7 +32,7 @@ const DragItem: React.FC<ComponentItemProps> = ({
     color: 'whiteAlpha.600',
   }
 
-  if (!soon) {
+  if (!soon && !isSelected) {
     boxProps = {
       ref: drag,
       color: 'whiteAlpha.800',
@@ -52,7 +63,13 @@ const DragItem: React.FC<ComponentItemProps> = ({
       {...boxProps}
     >
       <DragHandleIcon path="" fontSize="xs" mr={2} />
-      <Text letterSpacing="wide" fontSize="sm" textTransform="capitalize">
+      <Text
+        letterSpacing="wide"
+        fontSize="sm"
+        textTransform="capitalize"
+        overflow="hidden"
+        whiteSpace="nowrap"
+      >
         {label}
       </Text>
       {isMeta && (
@@ -68,6 +85,18 @@ const DragItem: React.FC<ComponentItemProps> = ({
           preset
         </Box>
       )}
+      {/* {isInstalled && (
+        <Box
+          ml={2}
+          borderWidth="1px"
+          color="teal.300"
+          borderColor="teal.600"
+          fontSize="xs"
+          borderRadius={4}
+          px={1}
+        >
+        </Box>
+      )} */}
       {soon && (
         <Box
           ml={2}

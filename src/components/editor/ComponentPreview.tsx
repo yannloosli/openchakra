@@ -1,7 +1,10 @@
-import React, { memo } from 'react'
+import React, { memo, Suspense, lazy, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import AlertPreview from '~components/editor/previews/AlertPreview'
+import TablePreview, {
+  TrPreview,
+} from '~components/editor/previews/TablePreview'
 import AvatarPreview, {
   AvatarBadgePreview,
   AvatarGroupPreview,
@@ -22,6 +25,8 @@ import WithChildrenPreviewContainer from '~components/editor/WithChildrenPreview
 import IconPreview from './previews/IconPreview'
 import IconButtonPreview from './previews/IconButtonPreview'
 import SelectPreview from '~components/editor/previews/SelectPreview'
+import ConditionalPreview from './previews/ConditionalPreview'
+import LoopPreview from './previews/LoopPreview'
 import NumberInputPreview from '~components/editor/previews/NumberInputPreview'
 import BreadcrumbPreview from './previews/BreadcrumbPreview'
 import BreadcrumbItemPreview from './previews/BreadcrumbItemPreview'
@@ -34,10 +39,67 @@ import SkeletonPreview, {
   SkeletonCirclePreview,
   SkeletonTextPreview,
 } from './previews/SkeletonPreview'
+import RangeSliderPreview from './previews/RangeSliderPreview'
+import RangeSliderTrackPreview from './previews/RangeSliderTrackPreview'
+import RangeSliderThumbPreview from './previews/RangeSliderThumbPreview'
+import RangeSliderFilledTrackPreview from './previews/RangeSliderFilledTrackPreview'
+import ModalPreview, {
+  ModalCloseButtonPreview,
+  ModalBodyPreview,
+  ModalContentPreview,
+  ModalFooterPreview,
+  ModalHeaderPreview,
+  ModalOverlayPreview,
+} from './previews/ModalPreview'
+import PopoverPreview, {
+  PopoverHeaderPreview,
+  PopoverArrowPreview,
+  PopoverBodyPreview,
+  PopoverCloseButtonPreview,
+  PopoverContentPreview,
+  PopoverFooterPreview,
+  PopoverTriggerPreview,
+} from './previews/PopoverPreview'
+import TooltipPreview from './previews/TooltipPreview'
+import TagPreview, {
+  TagLabelPreview,
+  TagLeftIconPreview,
+  TagRightIconPreview,
+  TagCloseButtonPreview,
+} from './previews/TagPreview'
+import {
+  getCustomComponentNames,
+  getInstalledComponents,
+} from '~core/selectors/customComponents'
+import MenuPreview, {
+  MenuListPreview,
+  MenuButtonPreview,
+  MenuItemPreview,
+  MenuItemOptionPreview,
+  MenuGroupPreview,
+  MenuOptionGroupPreview,
+  MenuDividerPreview,
+} from './previews/MenuPreview'
 import SliderPreview from './previews/SliderPreview'
 import SliderTrackPreview from './previews/SliderTrackPreview'
 import SliderThumbPreview from './previews/SliderThumbPreview'
-import SliderFilledTrackPreview from './previews/SliderFilledTrackPreview'
+import { convertToPascal } from './Editor'
+
+const importView = (component: string, isInstalled: boolean = false) => {
+  if (isInstalled) {
+    return lazy(() =>
+      import(`src/installed-components/${component}Preview.ic.tsx`).catch(() =>
+        import('src/custom-components/fallback'),
+      ),
+    )
+  }
+  component = convertToPascal(component)
+  return lazy(() =>
+    import(
+      `src/custom-components/editor/previews/${component}Preview.oc.tsx`
+    ).catch(() => import('src/custom-components/fallback')),
+  )
+}
 
 const ComponentPreview: React.FC<{
   componentName: string
@@ -48,6 +110,39 @@ const ComponentPreview: React.FC<{
   }
 
   const type = (component && component.type) || null
+  const [view, setView] = useState<any>()
+  const [instView, setInstView] = useState<any>()
+  const customComponents = useSelector(getCustomComponentNames)
+  const installedComponents = useSelector(getInstalledComponents)
+
+  useEffect(() => {
+    async function loadViews() {
+      if (type) {
+        const View = await importView(type)
+        const loadedComponent = <View component={component} />
+        Promise.all([loadedComponent]).then(setView)
+      }
+    }
+    loadViews()
+  }, [customComponents])
+
+  useEffect(() => {
+    async function loadViews() {
+      const installedComponent = componentName.split('-')[0]
+      const View = await importView(installedComponent, true)
+      const loadedComponent = <View component={component} />
+      Promise.all([loadedComponent]).then(setInstView)
+    }
+    loadViews()
+  }, [installedComponents])
+
+  if (type && Object.keys(installedComponents).includes(type)) {
+    return <Suspense fallback={'Loading...'}>{instView}</Suspense>
+  }
+
+  if (type && customComponents.includes(type)) {
+    return <Suspense fallback={'Loading...'}>{view}</Suspense>
+  }
 
   switch (type) {
     // Simple components
@@ -62,9 +157,10 @@ const ComponentPreview: React.FC<{
     case 'Heading':
     case 'Switch':
     case 'FormLabel':
+    case 'SliderFilledTrack':
+    case 'SliderMark':
     case 'FormHelperText':
     case 'FormErrorMessage':
-    case 'TabPanel':
     case 'Tab':
     case 'Input':
     case 'Radio':
@@ -74,7 +170,10 @@ const ComponentPreview: React.FC<{
     case 'StatLabel':
     case 'StatNumber':
     case 'StatArrow':
-    case 'SliderFilledTrack':
+    case 'RangeSliderFilledTrack':
+    case 'Td':
+    case 'Th':
+    case 'TableCaption':
       return (
         <PreviewContainer
           component={component}
@@ -94,7 +193,6 @@ const ComponentPreview: React.FC<{
     case 'AlertTitle':
     case 'InputRightAddon':
     case 'InputLeftAddon':
-    case 'Tag':
       return (
         <PreviewContainer
           component={component}
@@ -111,10 +209,16 @@ const ComponentPreview: React.FC<{
     case 'Tabs':
     case 'List':
     case 'TabList':
+    case 'TabPanel':
     case 'TabPanels':
     case 'Grid':
     case 'Center':
     case 'Container':
+    case 'TableContainer':
+    case 'Thead':
+    case 'Tbody':
+    case 'Tfoot':
+      // case 'Tr':
       return (
         <WithChildrenPreviewContainer
           enableVisualHelper
@@ -174,18 +278,90 @@ const ComponentPreview: React.FC<{
       return <NumberInputPreview component={component} />
     case 'Highlight':
       return <HighlightPreview component={component} />
-    case 'StatGroup':
-      return <StatGroupPreview component={component} />
-    case 'Stat':
-      return <StatPreview component={component} />
-    case 'StatHelpText':
-      return <StatHelpTextPreview component={component} />
     case 'Skeleton':
       return <SkeletonPreview component={component} />
     case 'SkeletonText':
       return <SkeletonTextPreview component={component} />
     case 'SkeletonCircle':
       return <SkeletonCirclePreview component={component} />
+    case 'RangeSliderTrack':
+      return <RangeSliderTrackPreview component={component} />
+    case 'RangeSlider':
+      return <RangeSliderPreview component={component} />
+    case 'RangeSliderThumb':
+      return <RangeSliderThumbPreview component={component} />
+    case 'Stat':
+      return <StatPreview component={component} />
+    case 'StatHelpText':
+      return <StatHelpTextPreview component={component} />
+    case 'Popover':
+      return <PopoverPreview component={component} />
+    case 'PopoverCloseButton':
+      return <PopoverCloseButtonPreview component={component} />
+    case 'PopoverHeader':
+      return <PopoverHeaderPreview component={component} />
+    case 'PopoverContent':
+      return <PopoverContentPreview component={component} />
+    case 'PopoverArrow':
+      return <PopoverArrowPreview component={component} />
+    case 'PopoverFooter':
+      return <PopoverFooterPreview component={component} />
+    case 'PopoverBody':
+      return <PopoverBodyPreview component={component} />
+    case 'PopoverTrigger':
+      return <PopoverTriggerPreview component={component} />
+    case 'StatGroup':
+      return <StatGroupPreview component={component} />
+    case 'Table':
+      return <TablePreview component={component} />
+    case 'Tr':
+      return <TrPreview component={component} />
+    case 'Tag':
+      return <TagPreview component={component} />
+    case 'TagLabel':
+      return <TagLabelPreview component={component} />
+    case 'TagLeftIcon':
+      return <TagLeftIconPreview component={component} />
+    case 'TagRightIcon':
+      return <TagRightIconPreview component={component} />
+    case 'TagCloseButton':
+      return <TagCloseButtonPreview component={component} />
+    case 'Conditional':
+      return <ConditionalPreview component={component} />
+    case 'Loop':
+      return <LoopPreview component={component} />
+    case 'Modal':
+      return <ModalPreview component={component} />
+    case 'ModalCloseButton':
+      return <ModalCloseButtonPreview component={component} />
+    case 'ModalHeader':
+      return <ModalHeaderPreview component={component} />
+    case 'ModalContent':
+      return <ModalContentPreview component={component} />
+    case 'ModalOverlay':
+      return <ModalOverlayPreview component={component} />
+    case 'ModalFooter':
+      return <ModalFooterPreview component={component} />
+    case 'ModalBody':
+      return <ModalBodyPreview component={component} />
+    case 'Tooltip':
+      return <TooltipPreview component={component} />
+    case 'Menu':
+      return <MenuPreview component={component} />
+    case 'MenuButton':
+      return <MenuButtonPreview component={component} />
+    case 'MenuList':
+      return <MenuListPreview component={component} />
+    case 'MenuGroup':
+      return <MenuGroupPreview component={component} />
+    case 'MenuOptionGroup':
+      return <MenuOptionGroupPreview component={component} />
+    case 'MenuItemOption':
+      return <MenuItemOptionPreview component={component} />
+    case 'MenuItem':
+      return <MenuItemPreview component={component} />
+    case 'MenuDivider':
+      return <MenuDividerPreview component={component} />
     case 'SliderTrack':
       return <SliderTrackPreview component={component} />
     case 'Slider':

@@ -1,5 +1,10 @@
 import React, { useState, ReactNode } from 'react'
-import { Combobox } from '@headlessui/react'
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+} from '@reach/combobox'
 import { Input } from '@chakra-ui/react'
 import { useForm } from '~hooks/useForm'
 
@@ -26,28 +31,32 @@ const InputSuggestion: React.FC<FormControlPropType> = ({
 
   return (
     <Combobox
-      onChange={item => {
+      openOnFocus
+      onSelect={item => {
         setValue(name, item)
       }}
-      value={ltrim(value)}
     >
-      <Combobox.Input
+      <ComboboxInput
         onFocus={() => setIsFocus(true)}
         id={name}
         value={ltrim(value)}
         name={name}
         onChange={handleChange}
         as={Input}
+        aria-labelledby={name}
+        size="sm"
         autoComplete="off"
       />
 
       {isFocus && (
-          <Combobox.Options
+        <ComboboxPopover>
+          <ComboboxList
             style={{ maxHeight: 200, overflow: 'scroll' }}
             aria-labelledby={name}
           >
             {children}
-          </Combobox.Options>
+          </ComboboxList>
+        </ComboboxPopover>
       )}
     </Combobox>
   )

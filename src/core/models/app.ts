@@ -5,6 +5,7 @@ type Overlay = undefined | { rect: DOMRect; id: string; type: ComponentType }
 export type AppState = {
   showLayout: boolean
   showCode: boolean
+  showLoader: boolean
   inputTextFocused: boolean
   editorWidth: string
   overlay: undefined | Overlay
@@ -14,6 +15,7 @@ const app = createModel({
   state: {
     showLayout: true,
     showCode: false,
+    showLoader: false,
     inputTextFocused: false,
     editorWidth: '100%',
     overlay: undefined,
@@ -29,6 +31,12 @@ const app = createModel({
       return {
         ...state,
         showCode: !state.showCode,
+      }
+    },
+    toggleLoader(state: AppState): AppState {
+      return {
+        ...state,
+        showLoader: !state.showLoader,
       }
     },
     toggleInputText(state: AppState): AppState {

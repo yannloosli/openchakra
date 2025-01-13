@@ -7,6 +7,7 @@ export const productHunt: IComponents = {
     props: {
       backgroundColor: '#f3f3f3',
     },
+    params: []
   },
   'comp-root': {
     id: 'comp-root',

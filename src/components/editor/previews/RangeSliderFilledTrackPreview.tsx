@@ -1,10 +1,10 @@
 import React from 'react'
 import { useInteractive } from '~hooks/useInteractive'
 import ComponentPreview from '~components/editor/ComponentPreview'
-import { SliderFilledTrack } from '@chakra-ui/react'
+import { RangeSliderFilledTrack } from '@chakra-ui/react'
 import { useDropComponent } from '~hooks/useDropComponent'
 
-export const SliderFilledTrackPreview = ({ component }: IPreviewProps) => {
+export const RangeSliderFilledTrackPreview = ({ component }: IPreviewProps) => {
   const { props, ref } = useInteractive(component, false)
   const { drop, isOver } = useDropComponent(component.id)
 
@@ -13,12 +13,12 @@ export const SliderFilledTrackPreview = ({ component }: IPreviewProps) => {
   }
 
   return (
-    <SliderFilledTrack ref={drop(ref)} {...props}>
+    <RangeSliderFilledTrack ref={drop(ref)} {...props}>
       {component.children.map((key: string) => (
         <ComponentPreview key={key} componentName={key} />
       ))}
-    </SliderFilledTrack>
+    </RangeSliderFilledTrack>
   )
 }
 
-export default SliderFilledTrackPreview
+export default RangeSliderFilledTrackPreview

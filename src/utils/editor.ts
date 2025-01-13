@@ -16,6 +16,17 @@ const TABLE_COMPONENTS: (ComponentType | MetaComponentType)[] = [
   'TableContainer',
 ]
 
+const MENU_COMPONENTS: (ComponentType | MetaComponentType)[] = [
+  'Menu',
+  'MenuList',
+  'MenuButton',
+  'MenuItem',
+  'MenuGroup',
+  'MenuDivider',
+  'MenuOptionGroup',
+  'MenuItemOption',
+]
+
 export const COMPONENTS: (ComponentType | MetaComponentType)[] = [
   ...ALERT_COMPONENTS,
   'Avatar',
@@ -107,7 +118,7 @@ export const COMPONENTS: (ComponentType | MetaComponentType)[] = [
   'Breadcrumb',
   'BreadcrumbItem',
   'BreadcrumbLink',
-  'Menu',
+  ...MENU_COMPONENTS,
   'NumberInput',
   'AccordionItem',
   'AccordionButton',
@@ -153,6 +164,11 @@ export const COMPONENTS: (ComponentType | MetaComponentType)[] = [
 ]
 
 export const AccordionWhitelist: (
+  | ComponentType
+  | MetaComponentType
+)[] = COMPONENTS.filter(name => !ALERT_COMPONENTS.includes(name))
+
+export const MenuWhitelist: (
   | ComponentType
   | MetaComponentType
 )[] = COMPONENTS.filter(name => !ALERT_COMPONENTS.includes(name))

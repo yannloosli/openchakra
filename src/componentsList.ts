@@ -66,7 +66,12 @@ export const menuItems: MenuItems = {
       FormErrorMessage: {},
     },
   },
-  Grid: {},
+  Grid: {
+    children: {
+      Grid: {},
+      GridItem: {},
+    }
+  },
   Heading: {},
   Highlight: {},
   Icon: {},
@@ -219,6 +224,7 @@ export const componentsList: ComponentType[] = [
   'FormHelperText',
   'FormLabel',
   'Grid',
+  'GridItem',
   'Heading',
   'Highlight',
   'Icon',

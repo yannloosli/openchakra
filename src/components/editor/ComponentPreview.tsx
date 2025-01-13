@@ -216,6 +216,7 @@ const ComponentPreview: React.FC<{
     case 'TabPanel':
     case 'TabPanels':
     case 'Grid':
+    case 'GridItem':
     case 'Center':
     case 'Container':
     case 'TableContainer':

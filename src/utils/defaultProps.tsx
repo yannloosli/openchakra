@@ -174,6 +174,7 @@ type PreviewDefaultProps = {
     FormHelperText?: PropsWithForm<TextProps>
     FormErrorMessage?: PropsWithForm<FormErrorMessageProps>
     Grid?: PropsWithForm<GridProps>
+    GridItem?: PropsWithForm<GridItemProps>
     TabList?: PropsWithForm<TabListProps>
     TabPanel?: PropsWithForm<TabPanelProps>
     TabPanels?: PropsWithForm<TabPanelsProps>
@@ -323,6 +324,9 @@ export const DEFAULT_PROPS: PreviewDefaultProps | any = {
             display: 'grid',
         },
     },
+    GridItem: {
+        colSpan: 1,
+      },
     Heading: {
         children: 'Heading title',
     },

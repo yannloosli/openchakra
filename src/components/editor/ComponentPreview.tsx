@@ -3,16 +3,16 @@ import { useSelector } from 'react-redux'
 
 import AlertPreview from '~components/editor/previews/AlertPreview'
 import TablePreview, {
-  TrPreview,
+    TrPreview,
 } from '~components/editor/previews/TablePreview'
 import AvatarPreview, {
-  AvatarBadgePreview,
-  AvatarGroupPreview,
+    AvatarBadgePreview,
+    AvatarGroupPreview,
 } from '../../components/editor/previews/AvatarPreview'
 import AccordionPreview, {
-  AccordionButtonPreview,
-  AccordionItemPreview,
-  AccordionPanelPreview,
+    AccordionButtonPreview,
+    AccordionItemPreview,
+    AccordionPanelPreview,
 } from '~components/editor/previews/AccordionPreview'
 import * as Chakra from '@chakra-ui/react'
 import { getComponentBy } from '~core/selectors/components'
@@ -32,53 +32,53 @@ import BreadcrumbPreview from './previews/BreadcrumbPreview'
 import BreadcrumbItemPreview from './previews/BreadcrumbItemPreview'
 import HighlightPreview from './previews/HighlightPreview'
 import StatGroupPreview, {
-  StatHelpTextPreview,
-  StatPreview,
+    StatHelpTextPreview,
+    StatPreview,
 } from './previews/StatPreview'
 import SkeletonPreview, {
-  SkeletonCirclePreview,
-  SkeletonTextPreview,
+    SkeletonCirclePreview,
+    SkeletonTextPreview,
 } from './previews/SkeletonPreview'
 import RangeSliderPreview from './previews/RangeSliderPreview'
 import RangeSliderTrackPreview from './previews/RangeSliderTrackPreview'
 import RangeSliderThumbPreview from './previews/RangeSliderThumbPreview'
 import RangeSliderFilledTrackPreview from './previews/RangeSliderFilledTrackPreview'
 import ModalPreview, {
-  ModalCloseButtonPreview,
-  ModalBodyPreview,
-  ModalContentPreview,
-  ModalFooterPreview,
-  ModalHeaderPreview,
-  ModalOverlayPreview,
+    ModalCloseButtonPreview,
+    ModalBodyPreview,
+    ModalContentPreview,
+    ModalFooterPreview,
+    ModalHeaderPreview,
+    ModalOverlayPreview,
 } from './previews/ModalPreview'
 import PopoverPreview, {
-  PopoverHeaderPreview,
-  PopoverArrowPreview,
-  PopoverBodyPreview,
-  PopoverCloseButtonPreview,
-  PopoverContentPreview,
-  PopoverFooterPreview,
-  PopoverTriggerPreview,
+    PopoverHeaderPreview,
+    PopoverArrowPreview,
+    PopoverBodyPreview,
+    PopoverCloseButtonPreview,
+    PopoverContentPreview,
+    PopoverFooterPreview,
+    PopoverTriggerPreview,
 } from './previews/PopoverPreview'
 import TooltipPreview from './previews/TooltipPreview'
 import TagPreview, {
-  TagLabelPreview,
-  TagLeftIconPreview,
-  TagRightIconPreview,
-  TagCloseButtonPreview,
+    TagLabelPreview,
+    TagLeftIconPreview,
+    TagRightIconPreview,
+    TagCloseButtonPreview,
 } from './previews/TagPreview'
 import {
-  getCustomComponentNames,
-  getInstalledComponents,
+    getCustomComponentNames,
+    getInstalledComponents,
 } from '~core/selectors/customComponents'
 import MenuPreview, {
-  MenuListPreview,
-  MenuButtonPreview,
-  MenuItemPreview,
-  MenuItemOptionPreview,
-  MenuGroupPreview,
-  MenuOptionGroupPreview,
-  MenuDividerPreview,
+    MenuListPreview,
+    MenuButtonPreview,
+    MenuItemPreview,
+    MenuItemOptionPreview,
+    MenuGroupPreview,
+    MenuOptionGroupPreview,
+    MenuDividerPreview,
 } from './previews/MenuPreview'
 import SliderPreview from './previews/SliderPreview'
 import SliderTrackPreview from './previews/SliderTrackPreview'
@@ -86,65 +86,67 @@ import SliderThumbPreview from './previews/SliderThumbPreview'
 import { convertToPascal } from './Editor'
 
 const importView = (component: string, isInstalled: boolean = false) => {
-  if (isInstalled) {
+    if (isInstalled) {
+        return lazy(() =>
+            import(`src/installed-components/${component}Preview.ic.tsx`).catch(() =>
+                import('src/custom-components/fallback'),
+            ),
+        )
+    }
+    component = convertToPascal(component)
     return lazy(() =>
-      import(`src/installed-components/${component}Preview.ic.tsx`).catch(() =>
-        import('src/custom-components/fallback'),
-      ),
+        import(
+            `src/custom-components/editor/previews/${component}Preview.oc.tsx`
+        ).catch(() => import('src/custom-components/fallback')),
     )
-  }
-  component = convertToPascal(component)
-  return lazy(() =>
-    import(
-      `src/custom-components/editor/previews/${component}Preview.oc.tsx`
-    ).catch(() => import('src/custom-components/fallback')),
-  )
 }
 
 const ComponentPreview: React.FC<{
-  componentName: string
-}> = ({ componentName, ...forwardedProps }) => {
-  const component = useSelector(getComponentBy(componentName))
-  if (!component) {
-    console.error(`ComponentPreview unavailable for component ${componentName}`)
-  }
+    componentName: string
+    index: number
+}> = ({ componentName, index, ...forwardedProps }) => {
+    const component = useSelector(getComponentBy(componentName))
 
-  const type = (component && component.type) || null
-  const [view, setView] = useState<any>()
-  const [instView, setInstView] = useState<any>()
-  const customComponents = useSelector(getCustomComponentNames)
-  const installedComponents = useSelector(getInstalledComponents)
-
-  useEffect(() => {
-    async function loadViews() {
-      if (type) {
-        const View = await importView(type)
-        const loadedComponent = <View component={component} />
-        Promise.all([loadedComponent]).then(setView)
-      }
+    if (!component) {
+        console.error(`ComponentPreview unavailable for component ${componentName}`)
     }
-    loadViews()
-  }, [customComponents])
 
-  useEffect(() => {
-    async function loadViews() {
-      const installedComponent = componentName.split('-')[0]
-      const View = await importView(installedComponent, true)
-      const loadedComponent = <View component={component} />
-      Promise.all([loadedComponent]).then(setInstView)
+    const type = (component && component.type) || null
+    const [view, setView] = useState<any>()
+    const [instView, setInstView] = useState<any>()
+    const customComponents = useSelector(getCustomComponentNames)
+    const installedComponents = useSelector(getInstalledComponents)
+
+    useEffect(() => {
+        async function loadViews() {
+            if (type) {
+                const View = await importView(type)
+                const loadedComponent = <View component={component} />
+                Promise.all([loadedComponent]).then(setView)
+            }
+        }
+        loadViews()
+    }, [customComponents])
+
+    useEffect(() => {
+        async function loadViews() {
+            const installedComponent = componentName.split('-')[0]
+            const View = await importView(installedComponent, true)
+            const loadedComponent = <View component={component} />
+            Promise.all([loadedComponent]).then(setInstView)
+        }
+        loadViews()
+    }, [installedComponents])
+
+    if (type && Object.keys(installedComponents).includes(type)) {
+        return <Suspense fallback={'Loading...'}>{instView}</Suspense>
     }
-    loadViews()
-  }, [installedComponents])
 
-  if (type && Object.keys(installedComponents).includes(type)) {
-    return <Suspense fallback={'Loading...'}>{instView}</Suspense>
-  }
+    if (type && customComponents.includes(type)) {
+        return <Suspense fallback={'Loading...'}>{view}</Suspense>
+    }
 
-  if (type && customComponents.includes(type)) {
-    return <Suspense fallback={'Loading...'}>{view}</Suspense>
-  }
-
-  switch (type) {
+    switch (type) {
     // Simple components
     case 'Badge':
     case 'Image':
@@ -174,13 +176,14 @@ const ComponentPreview: React.FC<{
     case 'Td':
     case 'Th':
     case 'TableCaption':
-      return (
-        <PreviewContainer
-          component={component}
-          type={Chakra[type]}
-          {...forwardedProps}
-        />
-      )
+        return (
+            <PreviewContainer
+                index={index}
+                component={component}
+                type={Chakra[type]}
+                {...forwardedProps}
+            />
+        )
     // Wrapped functional components (forward ref issue)
     case 'AlertIcon':
     case 'Progress':
@@ -193,14 +196,15 @@ const ComponentPreview: React.FC<{
     case 'AlertTitle':
     case 'InputRightAddon':
     case 'InputLeftAddon':
-      return (
-        <PreviewContainer
-          component={component}
-          type={Chakra[type]}
-          {...forwardedProps}
-          isBoxWrapped
-        />
-      )
+        return (
+            <PreviewContainer
+                index={index}
+                component={component}
+                type={Chakra[type]}
+                {...forwardedProps}
+                isBoxWrapped
+            />
+        )
     // Components with childrens
     case 'Box':
     case 'SimpleGrid':
@@ -218,159 +222,161 @@ const ComponentPreview: React.FC<{
     case 'Thead':
     case 'Tbody':
     case 'Tfoot':
-      // case 'Tr':
-      return (
-        <WithChildrenPreviewContainer
-          enableVisualHelper
-          component={component}
-          type={Chakra[type]}
-          {...forwardedProps}
-        />
-      )
+        // case 'Tr':
+        return (
+            <WithChildrenPreviewContainer
+                enableVisualHelper
+                index={index}
+                component={component}
+                type={Chakra[type]}
+                {...forwardedProps}
+            />
+        )
     case 'RadioGroup':
     case 'Stack':
     case 'InputGroup':
-      return (
-        <WithChildrenPreviewContainer
-          enableVisualHelper
-          component={component}
-          type={Chakra[type]}
-          {...forwardedProps}
-          isBoxWrapped
-        />
-      )
+        return (
+            <WithChildrenPreviewContainer
+                enableVisualHelper
+                index={index}
+                component={component}
+                type={Chakra[type]}
+                {...forwardedProps}
+                isBoxWrapped
+            />
+        )
     // More complex components
     case 'InputRightElement':
-      return <InputRightElementPreview component={component} />
+        return <InputRightElementPreview component={component} index={index} />
     case 'InputLeftElement':
-      return <InputLeftElementPreview component={component} />
+        return <InputLeftElementPreview component={component} index={index} />
     case 'Avatar':
-      return <AvatarPreview component={component} />
+        return <AvatarPreview component={component} index={index} />
     case 'AvatarBadge':
-      return <AvatarBadgePreview component={component} />
+        return <AvatarBadgePreview component={component} index={index} />
     case 'AvatarGroup':
-      return <AvatarGroupPreview component={component} />
+        return <AvatarGroupPreview component={component} index={index} />
     case 'Alert':
-      return <AlertPreview component={component} />
+        return <AlertPreview component={component} index={index} />
     case 'Accordion':
-      return <AccordionPreview component={component} />
+        return <AccordionPreview component={component} index={index} />
     case 'AccordionButton':
-      return <AccordionButtonPreview component={component} />
+        return <AccordionButtonPreview component={component} index={index} />
     case 'AccordionItem':
-      return <AccordionItemPreview component={component} />
+        return <AccordionItemPreview component={component} index={index} />
     case 'AccordionPanel':
-      return <AccordionPanelPreview component={component} />
+        return <AccordionPanelPreview component={component} index={index} />
     case 'AspectRatio':
-      return <AspectRatioPreview component={component} />
+        return <AspectRatioPreview component={component} index={index} />
     case 'Button':
-      return <ButtonPreview component={component} />
+        return <ButtonPreview component={component} index={index} />
     case 'Breadcrumb':
-      return <BreadcrumbPreview component={component} />
+        return <BreadcrumbPreview component={component} index={index} />
     case 'BreadcrumbItem':
-      return <BreadcrumbItemPreview component={component} />
+        return <BreadcrumbItemPreview component={component} index={index} />
     case 'Icon':
-      return <IconPreview component={component} />
+        return <IconPreview component={component} index={index} />
     case 'IconButton':
-      return <IconButtonPreview component={component} />
+        return <IconButtonPreview component={component} index={index} />
     case 'Select':
-      return <SelectPreview component={component} />
+        return <SelectPreview component={component} index={index} />
     case 'NumberInput':
-      return <NumberInputPreview component={component} />
+        return <NumberInputPreview component={component} index={index} />
     case 'Highlight':
-      return <HighlightPreview component={component} />
+        return <HighlightPreview component={component} index={index} />
     case 'Skeleton':
-      return <SkeletonPreview component={component} />
+        return <SkeletonPreview component={component} index={index} />
     case 'SkeletonText':
-      return <SkeletonTextPreview component={component} />
+        return <SkeletonTextPreview component={component} index={index} />
     case 'SkeletonCircle':
-      return <SkeletonCirclePreview component={component} />
+        return <SkeletonCirclePreview component={component} index={index} />
     case 'RangeSliderTrack':
-      return <RangeSliderTrackPreview component={component} />
+        return <RangeSliderTrackPreview component={component} index={index} />
     case 'RangeSlider':
-      return <RangeSliderPreview component={component} />
+        return <RangeSliderPreview component={component} index={index} />
     case 'RangeSliderThumb':
-      return <RangeSliderThumbPreview component={component} />
+        return <RangeSliderThumbPreview component={component} index={index} />
     case 'Stat':
-      return <StatPreview component={component} />
+        return <StatPreview component={component} index={index} />
     case 'StatHelpText':
-      return <StatHelpTextPreview component={component} />
+        return <StatHelpTextPreview component={component} index={index} />
     case 'Popover':
-      return <PopoverPreview component={component} />
+        return <PopoverPreview component={component} index={index} />
     case 'PopoverCloseButton':
-      return <PopoverCloseButtonPreview component={component} />
+        return <PopoverCloseButtonPreview component={component} index={index} />
     case 'PopoverHeader':
-      return <PopoverHeaderPreview component={component} />
+        return <PopoverHeaderPreview component={component} index={index} />
     case 'PopoverContent':
-      return <PopoverContentPreview component={component} />
+        return <PopoverContentPreview component={component} index={index} />
     case 'PopoverArrow':
-      return <PopoverArrowPreview component={component} />
+        return <PopoverArrowPreview component={component} index={index} />
     case 'PopoverFooter':
-      return <PopoverFooterPreview component={component} />
+        return <PopoverFooterPreview component={component} index={index} />
     case 'PopoverBody':
-      return <PopoverBodyPreview component={component} />
+        return <PopoverBodyPreview component={component} index={index} />
     case 'PopoverTrigger':
-      return <PopoverTriggerPreview component={component} />
+        return <PopoverTriggerPreview component={component} index={index} />
     case 'StatGroup':
-      return <StatGroupPreview component={component} />
+        return <StatGroupPreview component={component} index={index} />
     case 'Table':
-      return <TablePreview component={component} />
+        return <TablePreview component={component} index={index} />
     case 'Tr':
-      return <TrPreview component={component} />
+        return <TrPreview component={component} index={index} />
     case 'Tag':
-      return <TagPreview component={component} />
+        return <TagPreview component={component} index={index} />
     case 'TagLabel':
-      return <TagLabelPreview component={component} />
+        return <TagLabelPreview component={component} index={index} />
     case 'TagLeftIcon':
-      return <TagLeftIconPreview component={component} />
+        return <TagLeftIconPreview component={component} index={index} />
     case 'TagRightIcon':
-      return <TagRightIconPreview component={component} />
+        return <TagRightIconPreview component={component} index={index} />
     case 'TagCloseButton':
-      return <TagCloseButtonPreview component={component} />
+        return <TagCloseButtonPreview component={component} index={index} />
     case 'Conditional':
-      return <ConditionalPreview component={component} />
+        return <ConditionalPreview component={component} index={index} />
     case 'Loop':
-      return <LoopPreview component={component} />
+        return <LoopPreview component={component} index={index}/>
     case 'Modal':
-      return <ModalPreview component={component} />
+        return <ModalPreview component={component} index={index}/>
     case 'ModalCloseButton':
-      return <ModalCloseButtonPreview component={component} />
+        return <ModalCloseButtonPreview component={component} index={index}/>
     case 'ModalHeader':
-      return <ModalHeaderPreview component={component} />
+        return <ModalHeaderPreview component={component} index={index}/>
     case 'ModalContent':
-      return <ModalContentPreview component={component} />
+        return <ModalContentPreview component={component} index={index}/>
     case 'ModalOverlay':
-      return <ModalOverlayPreview component={component} />
+        return <ModalOverlayPreview component={component} index={index}/>
     case 'ModalFooter':
-      return <ModalFooterPreview component={component} />
+        return <ModalFooterPreview component={component} index={index}/>
     case 'ModalBody':
-      return <ModalBodyPreview component={component} />
+        return <ModalBodyPreview component={component} index={index}/>
     case 'Tooltip':
-      return <TooltipPreview component={component} />
+        return <TooltipPreview component={component} index={index} />
     case 'Menu':
-      return <MenuPreview component={component} />
+        return <MenuPreview component={component} index={index} />
     case 'MenuButton':
-      return <MenuButtonPreview component={component} />
+        return <MenuButtonPreview component={component} index={index} />
     case 'MenuList':
-      return <MenuListPreview component={component} />
+        return <MenuListPreview component={component} index={index} />
     case 'MenuGroup':
-      return <MenuGroupPreview component={component} />
+        return <MenuGroupPreview component={component} index={index} />
     case 'MenuOptionGroup':
-      return <MenuOptionGroupPreview component={component} />
+        return <MenuOptionGroupPreview component={component} index={index} />
     case 'MenuItemOption':
-      return <MenuItemOptionPreview component={component} />
+        return <MenuItemOptionPreview component={component} index={index} />
     case 'MenuItem':
-      return <MenuItemPreview component={component} />
+        return <MenuItemPreview component={component} index={index} />
     case 'MenuDivider':
-      return <MenuDividerPreview component={component} />
+        return <MenuDividerPreview component={component} index={index} />
     case 'SliderTrack':
-      return <SliderTrackPreview component={component} />
+        return <SliderTrackPreview component={component} index={index} />
     case 'Slider':
-      return <SliderPreview component={component} />
+        return <SliderPreview component={component} index={index} />
     case 'SliderThumb':
-      return <SliderThumbPreview component={component} />
+        return <SliderThumbPreview component={component} index={index} />
     default:
-      return null
-  }
+        return null
+    }
 }
 
 export default memo(ComponentPreview)

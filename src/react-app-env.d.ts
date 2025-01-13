@@ -173,6 +173,7 @@ interface IComponents {
 
 interface IPreviewProps {
   component: IComponent
+  index: number
 }
 
 interface ComponentItemProps {
@@ -188,4 +189,5 @@ interface ComponentItemProps {
   custom?: boolean
   rootParentType?: ComponentType
   children?: React.ReactNode
+  index?: number
 }

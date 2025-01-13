@@ -4,7 +4,7 @@ import ComponentPreview from '~components/editor/ComponentPreview'
 import { useDropComponent } from '~hooks/useDropComponent'
 import { useInteractive } from '~hooks/useInteractive'
 
-const LoopPreview: React.FC<{ component: IComponent }> = ({ component }) => {
+const LoopPreview: React.FC<{ component: IComponent, index: number }> = ({ component, index }) => {
   const { drop, isOver } = useDropComponent(component.id)
   const { props, ref } = useInteractive(component, true)
   if (isOver) {
@@ -25,7 +25,7 @@ const LoopPreview: React.FC<{ component: IComponent }> = ({ component }) => {
   }
 
   return (
-    <Box pos="relative" ref={drop(ref)} {...props}>
+    <Box pos="relative" ref={drop(ref)} index={index} {...props}>
       {!props.loopView ? (
         <>
           {component.children.map((key: string) => (

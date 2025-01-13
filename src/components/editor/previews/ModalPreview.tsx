@@ -5,124 +5,125 @@ import ComponentPreview from '~components/editor/ComponentPreview'
 import { Card, CardHeader, CardBody, CardFooter, Box } from '@chakra-ui/react'
 
 interface Props {
-  component: IComponent
+    component: IComponent,
+    index: number
 }
 
-const ModalPreview = ({ component }: Props) => {
-  const { drop, isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+const ModalPreview = ({ component, index }: Props) => {
+    const { drop, isOver } = useDropComponent(component.id)
+    const { props, ref } = useInteractive(component, true)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
-  let prop = { ...props }
-  delete prop['size']
-  delete prop['isOpen']
-  delete prop['showpreview']
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
+    let prop = { ...props }
+    delete prop['size']
+    delete prop['isOpen']
+    delete prop['showpreview']
 
-  return props.showpreview ? (
-    <Box display="flex" justifyContent="center">
-      <Card ref={drop(ref)} minW={props.size} {...prop} maxW={props.size}>
-        {component.children.map((key: string) => (
-          <ComponentPreview key={key} componentName={key} />
-        ))}
-      </Card>
-    </Box>
-  ) : (
-    <></>
-  )
+    return props.showpreview ? (
+        <Box display="flex" justifyContent="center" index={index}>
+            <Card ref={drop(ref)} minW={props.size} {...prop} maxW={props.size}>
+                {component.children.map((key: string) => (
+                    <ComponentPreview key={key} componentName={key} />
+                ))}
+            </Card>
+        </Box>
+    ) : (
+        <></>
+    )
 }
 
 export const ModalCloseButtonPreview = ({ component }: Props) => {
-  const { isOver } = useDropComponent(component.id)
-  const {
-    props: { icon, ...props },
-    ref,
-  } = useInteractive(component, true)
+    const { isOver } = useDropComponent(component.id)
+    const {
+        props: { icon, ...props },
+        ref,
+    } = useInteractive(component, true)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return <></>
+    return <></>
 }
 
 export const ModalHeaderPreview = ({ component }: Props) => {
-  const { isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+    const { isOver } = useDropComponent(component.id)
+    const { props, ref } = useInteractive(component, true)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return <CardHeader fontWeight="semibold" fontSize="xl" ref={ref} {...props} />
+    return <CardHeader fontWeight="semibold" fontSize="xl" ref={ref} {...props} />
 }
 
 export const ModalContentPreview = ({ component }: Props) => {
-  const { isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+    const { isOver } = useDropComponent(component.id)
+    const { props, ref } = useInteractive(component, true)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return (
-    <>
-      {component.children.map((key: string) => (
-        <ComponentPreview key={key} componentName={key} />
-      ))}
-    </>
-  )
+    return (
+        <>
+            {component.children.map((key: string) => (
+                <ComponentPreview key={key} componentName={key} />
+            ))}
+        </>
+    )
 }
 
 export const ModalFooterPreview = ({ component }: Props) => {
-  const { drop, isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+    const { drop, isOver } = useDropComponent(component.id)
+    const { props, ref } = useInteractive(component, true)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return (
-    <CardFooter
-      display="flex"
-      justifyContent="flex-end"
-      ref={drop(ref)}
-      {...props}
-    >
-      {component.children.map((key: string) => (
-        <ComponentPreview key={key} componentName={key} />
-      ))}
-    </CardFooter>
-  )
+    return (
+        <CardFooter
+            display="flex"
+            justifyContent="flex-end"
+            ref={drop(ref)}
+            {...props}
+        >
+            {component.children.map((key: string) => (
+                <ComponentPreview key={key} componentName={key} />
+            ))}
+        </CardFooter>
+    )
 }
 
 export const ModalBodyPreview = ({ component }: Props) => {
-  const { drop, isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+    const { drop, isOver } = useDropComponent(component.id)
+    const { props, ref } = useInteractive(component, true)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return (
-    <CardBody ref={drop(ref)} {...props}>
-      {component.children.map((key: string) => (
-        <ComponentPreview key={key} componentName={key} />
-      ))}
-    </CardBody>
-  )
+    return (
+        <CardBody ref={drop(ref)} {...props}>
+            {component.children.map((key: string) => (
+                <ComponentPreview key={key} componentName={key} />
+            ))}
+        </CardBody>
+    )
 }
 
 export const ModalOverlayPreview = ({ component }: Props) => {
-  const { isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+    const { isOver } = useDropComponent(component.id)
+    const { props, ref } = useInteractive(component, true)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return <></>
+    return <></>
 }
 
 export default ModalPreview

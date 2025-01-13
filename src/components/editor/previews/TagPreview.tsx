@@ -12,10 +12,11 @@ import {
 import icons from '~iconsList'
 
 interface Props {
-  component: IComponent
+  component: IComponent,
+  index: number
 }
 
-const TagPreview = ({ component }: Props) => {
+const TagPreview = ({ component, index }: Props) => {
   const { drop, isOver } = useDropComponent(component.id)
   const { props, ref } = useInteractive(component, true)
 
@@ -23,7 +24,7 @@ const TagPreview = ({ component }: Props) => {
     props.bg = 'teal.50'
   }
   return (
-    <Tag ref={drop(ref)} {...props}>
+    <Tag ref={drop(ref)} index={index} {...props}>
       {component.children.map((key: string) => (
         <ComponentPreview key={key} componentName={key} />
       ))}

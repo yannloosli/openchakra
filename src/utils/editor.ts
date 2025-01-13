@@ -27,6 +27,17 @@ const MENU_COMPONENTS: (ComponentType | MetaComponentType)[] = [
   'MenuItemOption',
 ]
 
+const POPOVER_COMPONENTS: (ComponentType | MetaComponentType)[] = [
+  'Popover',
+  'PopoverTrigger',
+  'PopoverContent',
+  'PopoverHeader',
+  'PopoverBody',
+  'PopoverArrow',
+  'PopoverCloseButton',
+  'PopoverFooter',
+]
+
 export const COMPONENTS: (ComponentType | MetaComponentType)[] = [
   ...ALERT_COMPONENTS,
   'Avatar',
@@ -140,6 +151,7 @@ export const COMPONENTS: (ComponentType | MetaComponentType)[] = [
   'StatArrow',
   'StatGroup',
   'Tooltip',
+  ...POPOVER_COMPONENTS,
   // Allow meta components
   'AlertMeta',
   'FormControlMeta',
@@ -189,5 +201,12 @@ export const rootComponents = COMPONENTS
         'AccordionItem',
         'BreadcrumbItem',
         'BreadcrumbLink',
+        'PopoverTrigger',
+        'PopoverContent',
+        'PopoverHeader',
+        'PopoverBody',
+        'PopoverArrow',
+        'PopoverCloseButton',
+        'PopoverFooter',
       ].includes(name),
   )

@@ -81,6 +81,8 @@ const componentsToTest = [
   'RadioGroup',
   'Select',
   'InputGroup',
+  'PopoverMeta',
+
   // 'AccordionHeader',
   'MenuMeta',
 ]

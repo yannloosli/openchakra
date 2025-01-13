@@ -1,7 +1,7 @@
 import React, { memo, Suspense, lazy, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import AlertPreview from '~components/editor/previews/AlertPreview'
+import AlertPreview from '../../components/editor/previews/AlertPreview'
 import AvatarPreview, {
     AvatarBadgePreview,
     AvatarGroupPreview,

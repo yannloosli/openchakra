@@ -21,6 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7810d49d3ad92ac684462cff8d448277616403df
 .next/
 pgdata/

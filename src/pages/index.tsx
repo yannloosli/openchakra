@@ -3,7 +3,6 @@ import { Flex, Box } from '@chakra-ui/react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { Global } from '@emotion/react'
-import Metadata from '~components/Metadata'
 import useShortcuts from '~hooks/useShortcuts'
 import Header from '~components/Header'
 import Loader from '~components/Loader'
@@ -29,7 +28,6 @@ const App = () => {
         })}
       />
       <Loader />
-      <Metadata />
       <Header />
       <DndProvider backend={HTML5Backend}>
         <Flex h="calc(100vh - 3rem)">

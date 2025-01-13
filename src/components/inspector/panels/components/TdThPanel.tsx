@@ -1,14 +1,14 @@
-import React, { memo } from 'react'
+import { memo } from 'react'
 import ChildrenControl from '~components/inspector/controls/ChildrenControl'
 import SwitchControl from '~components/inspector/controls/SwitchControl'
 
-const TdPanel = () => {
+const TdThPanel = () => {
   return (
     <>
       <ChildrenControl />
-      <SwitchControl label="Numeric" name="isNumeric" />
+      <SwitchControl label="Is numeric" name="isNumeric" />
     </>
   )
 }
 
-export default memo(TdPanel)
+export default memo(TdThPanel)

@@ -65,8 +65,8 @@ import LoopPanel from './components/LoopPanel'
 import { useSelector } from 'react-redux'
 import { getCustomComponentNames } from '~core/selectors/customComponents'
 import { convertToPascal } from '~components/editor/Editor'
-import TdPanel from './components/TdPanel'
 import TableCaptionPanel from './components/TableCaptionPanel'
+import TdThPanel from './components/TdThPanel'
 import ModalPanel from './components/ModalPanel'
 import ModalHeaderPanel from './components/ModalHeaderPanel'
 import TooltipPanel from './components/TooltipPanel'
@@ -203,8 +203,8 @@ const Panels: React.FC<{
       {type === 'RangeSlider' && <RangeSliderPanel />}
       {type === 'Table' && <TablePanel />}
       {type === 'TableCaption' && <TableCaptionPanel />}
-      {type === 'Td' && <TdPanel />}
-      {type === 'Th' && <TdPanel />}
+      {type === 'Td' && <TdThPanel />}
+      {type === 'Th' && <TdThPanel />}
       {type === 'Conditional' && <ConditionalPanel />}
       {type === 'Loop' && <LoopPanel />}
       {type === 'Modal' && <ModalPanel />}

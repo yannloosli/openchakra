@@ -2,9 +2,6 @@ import React, { memo, Suspense, lazy, useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 import AlertPreview from '~components/editor/previews/AlertPreview'
-import TablePreview, {
-    TrPreview,
-} from '~components/editor/previews/TablePreview'
 import AvatarPreview, {
     AvatarBadgePreview,
     AvatarGroupPreview,
@@ -22,27 +19,27 @@ import AspectRatioPreview from '~components/editor/previews/AspectRatioBoxPrevie
 import ButtonPreview from '~components/editor/previews/ButtonPreview'
 import PreviewContainer from '~components/editor/PreviewContainer'
 import WithChildrenPreviewContainer from '~components/editor/WithChildrenPreviewContainer'
-import IconPreview from './previews/IconPreview'
-import IconButtonPreview from './previews/IconButtonPreview'
+import IconPreview from '~components/editor/previews/IconPreview'
+import IconButtonPreview from '~components/editor/previews/IconButtonPreview'
 import SelectPreview from '~components/editor/previews/SelectPreview'
-import ConditionalPreview from './previews/ConditionalPreview'
-import LoopPreview from './previews/LoopPreview'
+import ConditionalPreview from '~components/editor/previews/ConditionalPreview'
+import LoopPreview from '~components/editor/previews/LoopPreview'
 import NumberInputPreview from '~components/editor/previews/NumberInputPreview'
-import BreadcrumbPreview from './previews/BreadcrumbPreview'
-import BreadcrumbItemPreview from './previews/BreadcrumbItemPreview'
-import HighlightPreview from './previews/HighlightPreview'
+import BreadcrumbPreview from '~components/editor/previews/BreadcrumbPreview'
+import BreadcrumbItemPreview from '~components/editor/previews/BreadcrumbItemPreview'
+import HighlightPreview from '~components/editor/previews/HighlightPreview'
 import StatGroupPreview, {
     StatHelpTextPreview,
     StatPreview,
-} from './previews/StatPreview'
+} from '~components/editor/previews/StatPreview'
 import SkeletonPreview, {
     SkeletonCirclePreview,
     SkeletonTextPreview,
-} from './previews/SkeletonPreview'
-import RangeSliderPreview from './previews/RangeSliderPreview'
-import RangeSliderTrackPreview from './previews/RangeSliderTrackPreview'
-import RangeSliderThumbPreview from './previews/RangeSliderThumbPreview'
-import RangeSliderFilledTrackPreview from './previews/RangeSliderFilledTrackPreview'
+} from '~components/editor/previews/SkeletonPreview'
+import RangeSliderPreview from '~components/editor/previews/RangeSliderPreview'
+import RangeSliderTrackPreview from '~components/editor/previews/RangeSliderTrackPreview'
+import RangeSliderThumbPreview from '~components/editor/previews/RangeSliderThumbPreview'
+import RangeSliderFilledTrackPreview from '~components/editor/previews/RangeSliderFilledTrackPreview'
 import ModalPreview, {
     ModalCloseButtonPreview,
     ModalBodyPreview,
@@ -50,7 +47,7 @@ import ModalPreview, {
     ModalFooterPreview,
     ModalHeaderPreview,
     ModalOverlayPreview,
-} from './previews/ModalPreview'
+} from '~components/editor/previews/ModalPreview'
 import PopoverPreview, {
     PopoverHeaderPreview,
     PopoverArrowPreview,
@@ -59,14 +56,14 @@ import PopoverPreview, {
     PopoverContentPreview,
     PopoverFooterPreview,
     PopoverTriggerPreview,
-} from './previews/PopoverPreview'
-import TooltipPreview from './previews/TooltipPreview'
+} from '~components/editor/previews/PopoverPreview'
+import TooltipPreview from '~components/editor/previews/TooltipPreview'
 import TagPreview, {
     TagLabelPreview,
     TagLeftIconPreview,
     TagRightIconPreview,
     TagCloseButtonPreview,
-} from './previews/TagPreview'
+} from '~components/editor/previews/TagPreview'
 import {
     getCustomComponentNames,
     getInstalledComponents,
@@ -79,10 +76,17 @@ import MenuPreview, {
     MenuGroupPreview,
     MenuOptionGroupPreview,
     MenuDividerPreview,
-} from './previews/MenuPreview'
-import SliderPreview from './previews/SliderPreview'
-import SliderTrackPreview from './previews/SliderTrackPreview'
-import SliderThumbPreview from './previews/SliderThumbPreview'
+} from '~components/editor/previews/MenuPreview'
+import SliderPreview from '~components/editor/previews/SliderPreview'
+import SliderTrackPreview from '~components/editor/previews/SliderTrackPreview'
+import SliderThumbPreview from '~components/editor/previews/SliderThumbPreview'
+import TableContainerPreview, {
+    TablePreview,
+    TbodyPreview,
+    TfootPreview,
+    TheadPreview,
+    TrPreview,
+} from '~components/editor/previews/TableContainerPreview'
 import { convertToPascal } from './Editor'
 
 const importView = (component: string, isInstalled: boolean = false) => {
@@ -323,6 +327,16 @@ const ComponentPreview: React.FC<{
         return <TablePreview component={component} index={index} />
     case 'Tr':
         return <TrPreview component={component} index={index} />
+    case 'Thead':
+        return <TheadPreview component={component} index={index} />
+    case 'Tbody':
+        return <TbodyPreview component={component} index={index} />
+    case 'Tfoot':
+        return <TfootPreview component={component} index={index} />
+    case 'TableContainer':
+        return <TableContainerPreview component={component} index={index} />
+    case 'Tr':
+        return <TrPreview component={component} index={index} />
     case 'Tag':
         return <TagPreview component={component} index={index} />
     case 'TagLabel':
@@ -336,21 +350,21 @@ const ComponentPreview: React.FC<{
     case 'Conditional':
         return <ConditionalPreview component={component} index={index} />
     case 'Loop':
-        return <LoopPreview component={component} index={index}/>
+        return <LoopPreview component={component} index={index} />
     case 'Modal':
-        return <ModalPreview component={component} index={index}/>
+        return <ModalPreview component={component} index={index} />
     case 'ModalCloseButton':
-        return <ModalCloseButtonPreview component={component} index={index}/>
+        return <ModalCloseButtonPreview component={component} index={index} />
     case 'ModalHeader':
-        return <ModalHeaderPreview component={component} index={index}/>
+        return <ModalHeaderPreview component={component} index={index} />
     case 'ModalContent':
-        return <ModalContentPreview component={component} index={index}/>
+        return <ModalContentPreview component={component} index={index} />
     case 'ModalOverlay':
-        return <ModalOverlayPreview component={component} index={index}/>
+        return <ModalOverlayPreview component={component} index={index} />
     case 'ModalFooter':
-        return <ModalFooterPreview component={component} index={index}/>
+        return <ModalFooterPreview component={component} index={index} />
     case 'ModalBody':
-        return <ModalBodyPreview component={component} index={index}/>
+        return <ModalBodyPreview component={component} index={index} />
     case 'Tooltip':
         return <TooltipPreview component={component} index={index} />
     case 'Menu':

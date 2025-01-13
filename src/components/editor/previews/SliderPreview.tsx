@@ -10,9 +10,9 @@ const acceptedTypesStat: ComponentType[] = [
   'SliderMark',
 ]
 
-export const SliderPreview = ({ component }: IPreviewProps) => {
-  const { props, ref } = useInteractive(component, true)
-  const { drop, isOver } = useDropComponent(component.id, acceptedTypesStat)
+export const SliderPreview = ({ component, index }: IPreviewProps) => {
+  const { props, ref } = useInteractive(component, index, true)
+  const { drop, isOver } = useDropComponent(component.id, index, acceptedTypesStat)
 
   if (isOver) {
     props.bg = 'teal.50'
@@ -22,7 +22,7 @@ export const SliderPreview = ({ component }: IPreviewProps) => {
     <Box ref={drop(ref)} {...props}>
       <Slider {...props}>
         {component.children.map((key: string) => (
-          <ComponentPreview key={key} componentName={key} />
+          <ComponentPreview key={key} index={index} componentName={key} />
         ))}
       </Slider>
     </Box>

@@ -470,7 +470,6 @@ export const generateMainTsx = (params: any, fileName: string) => {
 export const generateCode = async (
   components: IComponents,
   currentComponents: CustomDictionary,
-  installedComponents: CustomDictionary,
 ) => {
   let code = buildBlock({ component: components.root, components })
   let componentsCodes = buildComponents(components)
@@ -488,8 +487,7 @@ export const generateCode = async (
               components[name].type !== 'Conditional' &&
               components[name].type !== 'Loop' &&
               components[name].type !== 'Box' &&
-              !Object.keys(currentComponents).includes(components[name].type) &&
-              !Object.keys(installedComponents).includes(components[name].type),
+              !Object.keys(currentComponents).includes(components[name].type)
           )
           .map(name => components[name].type),
       ),
@@ -529,24 +527,6 @@ export const generateCode = async (
     ),
   ]
 
-  const installedImports = [
-    ...new Set(
-      Object.keys(components)
-        .filter(
-          name =>
-            name !== 'root' &&
-            components[name].type !== 'Conditional' &&
-            Object.keys(installedComponents).includes(components[name].type),
-        )
-        .map(
-          name =>
-            `import { ${components[name].type} } from '${
-              installedComponents[components[name].type]
-            }';`,
-        ),
-    ),
-  ]
-
   code = `import React, {RefObject} from 'react';
 import {
   ChakraProvider,
@@ -560,7 +540,6 @@ import { ${iconImports.join(',')} } from "@chakra-ui/icons";`
   }
 
   ${customImports.join(';')}
-  ${installedImports.join(';')}
 
 ${paramTypes ? paramTypes : ''}
 
@@ -579,7 +558,6 @@ export default App;`
 export const generateOcTsxCode = async (
   components: IComponents,
   currentComponents: CustomDictionary = {},
-  installedComponents: CustomDictionary = {},
 ) => {
   let code = buildBlock({ component: components.root, components })
   let componentsCodes = buildComponents(components)
@@ -598,8 +576,7 @@ export const generateOcTsxCode = async (
               components[name].type !== 'Conditional' &&
               components[name].type !== 'Loop' &&
               components[name].type !== 'Box' &&
-              !Object.keys(currentComponents).includes(components[name].type) &&
-              !Object.keys(installedComponents).includes(components[name].type),
+              !Object.keys(currentComponents).includes(components[name].type)
           )
           .map(name => components[name].type),
       ),
@@ -639,24 +616,6 @@ export const generateOcTsxCode = async (
     ),
   ]
 
-  const installedImports = [
-    ...new Set(
-      Object.keys(components)
-        .filter(
-          name =>
-            name !== 'root' &&
-            components[name].type !== 'Conditional' &&
-            Object.keys(installedComponents).includes(components[name].type),
-        )
-        .map(
-          name =>
-            `import { ${components[name].type} } from '${
-              installedComponents[components[name].type]
-            }';`,
-        ),
-    ),
-  ]
-
   code = `import React, {RefObject} from 'react';
 import {
   ChakraProvider,
@@ -670,7 +629,6 @@ import { ${iconImports.join(',')} } from "@chakra-ui/icons";`
   }
 
   ${customImports.join(';')}
-  ${installedImports.join(';')}
 
 ${paramTypes ? paramTypes : ''}
 

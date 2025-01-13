@@ -40,7 +40,6 @@ import { useInspectorUpdate } from '~contexts/inspector-context'
 import { componentsList } from '~componentsList'
 import {
   getCustomComponentNames,
-  getInstalledComponents,
 } from '~core/selectors/customComponents'
 import { ComponentWithRefs } from '~custom-components/refComponents'
 
@@ -87,7 +86,6 @@ const Inspector = () => {
   const [componentName, onChangeComponentName] = useState('')
   const componentsNames = useSelector(getComponentNames)
   const customComponentsNames = useSelector(getCustomComponentNames)
-  const installedComponents = useSelector(getInstalledComponents)
 
   const { clearActiveProps } = useInspectorUpdate()
 
@@ -114,7 +112,6 @@ const Inspector = () => {
   const isRoot = id === 'root'
   const parentIsRoot = component.parent === 'root'
   const isCustom = customComponentsNames.includes(type)
-  const isInstalled = Object.keys(installedComponents).includes(type)
 
   const docType = rootParentType || type
   const componentHasChildren = children.length > 0
@@ -237,7 +234,6 @@ const Inspector = () => {
           component={component}
           isRoot={isRoot}
           isCustom={isCustom}
-          isInstalled={isInstalled}
         />
       </Box>
 

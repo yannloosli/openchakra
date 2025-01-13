@@ -8,7 +8,6 @@ const DragItem: React.FC<ComponentItemProps> = ({
   soon,
   label,
   isMeta,
-  isInstalled,
   isSelected,
   custom,
   isChild,
@@ -20,7 +19,6 @@ const DragItem: React.FC<ComponentItemProps> = ({
       id: type,
       type,
       isMeta,
-      isInstalled,
       custom,
       rootParentType,
       isSelected,
@@ -85,18 +83,6 @@ const DragItem: React.FC<ComponentItemProps> = ({
           preset
         </Box>
       )}
-      {/* {isInstalled && (
-        <Box
-          ml={2}
-          borderWidth="1px"
-          color="teal.300"
-          borderColor="teal.600"
-          fontSize="xs"
-          borderRadius={4}
-          px={1}
-        >
-        </Box>
-      )} */}
       {soon && (
         <Box
           ml={2}

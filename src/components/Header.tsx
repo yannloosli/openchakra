@@ -33,7 +33,6 @@ import { useSelector } from 'react-redux'
 import { getComponents } from '~core/selectors/components'
 import {
   getCustomComponents,
-  getInstalledComponents,
 } from '~core/selectors/customComponents'
 import { getShowLayout, getShowCode } from '~core/selectors/app'
 import HeaderMenu from '~components/headerMenu/HeaderMenu'
@@ -43,7 +42,6 @@ import Themer from './themer/Themer'
 const CodeSandboxButton = () => {
   const components = useSelector(getComponents)
   const componentsList = useSelector(getCustomComponents)
-  const installedComponentsList = useSelector(getInstalledComponents)
   const [isLoading, setIsLoading] = useState(false)
 
   const exportToCodeSandbox = async (isTypeScript: boolean) => {
@@ -51,7 +49,6 @@ const CodeSandboxButton = () => {
     const code = await generateCode(
       components,
       componentsList,
-      installedComponentsList,
     )
     setIsLoading(false)
     const parameters = buildParameters(code, isTypeScript)

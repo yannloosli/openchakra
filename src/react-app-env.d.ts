@@ -185,7 +185,6 @@ interface ComponentItemProps {
   isChild?: boolean
   isSelected?: boolean
   isMeta?: boolean
-  isInstalled?: boolean
   soon?: boolean
   custom?: boolean
   rootParentType?: ComponentType

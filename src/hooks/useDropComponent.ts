@@ -7,7 +7,6 @@ import { rootComponents } from '~utils/editor'
 import useDispatch from './useDispatch'
 import {
   getCustomComponentNames,
-  getInstalledComponents,
 } from '~core/selectors/customComponents'
 
 export const useDropComponent = (
@@ -19,7 +18,6 @@ export const useDropComponent = (
 ) => {
   const dispatch = useDispatch()
   const customComponents = useSelector(getCustomComponentNames)
-  const installedComponents = useSelector(getInstalledComponents)
   const isSortHovered = useSelector((state: RootState) =>
     Boolean(state.components.present.sortHoveredId),
   )
@@ -41,7 +39,6 @@ export const useDropComponent = (
     accept: [
       ...accept,
       ...customComponents,
-      ...Object.keys(installedComponents),
     ],
     collect: monitor => ({
       isOver: monitor.isOver({ shallow: true }) && monitor.canDrop(),

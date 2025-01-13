@@ -66,7 +66,6 @@ import TagPreview, {
 } from '~components/editor/previews/TagPreview'
 import {
     getCustomComponentNames,
-    getInstalledComponents,
 } from '~core/selectors/customComponents'
 import MenuPreview, {
     MenuListPreview,
@@ -89,14 +88,7 @@ import TableContainerPreview, {
 } from '~components/editor/previews/TableContainerPreview'
 import { convertToPascal } from './Editor'
 
-const importView = (component: string, isInstalled: boolean = false) => {
-    if (isInstalled) {
-        return lazy(() =>
-            import(`src/installed-components/${component}Preview.ic.tsx`).catch(() =>
-                import('src/custom-components/fallback'),
-            ),
-        )
-    }
+const importView = (component: string) => {
     component = convertToPascal(component)
     return lazy(() =>
         import(
@@ -119,7 +111,6 @@ const ComponentPreview: React.FC<{
     const [view, setView] = useState<any>()
     const [instView, setInstView] = useState<any>()
     const customComponents = useSelector(getCustomComponentNames)
-    const installedComponents = useSelector(getInstalledComponents)
 
     useEffect(() => {
         async function loadViews() {
@@ -132,19 +123,6 @@ const ComponentPreview: React.FC<{
         loadViews()
     }, [customComponents])
 
-    useEffect(() => {
-        async function loadViews() {
-            const installedComponent = componentName.split('-')[0]
-            const View = await importView(installedComponent, true)
-            const loadedComponent = <View component={component} />
-            Promise.all([loadedComponent]).then(setInstView)
-        }
-        loadViews()
-    }, [installedComponents])
-
-    if (type && Object.keys(installedComponents).includes(type)) {
-        return <Suspense fallback={'Loading...'}>{instView}</Suspense>
-    }
 
     if (type && customComponents.includes(type)) {
         return <Suspense fallback={'Loading...'}>{view}</Suspense>

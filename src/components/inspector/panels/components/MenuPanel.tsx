@@ -13,6 +13,9 @@ const MenuPanel = () => {
     <>
       <SwitchControl label="Show Menu" name="showpreview" />
       <SwitchControl label="isOpen" name="isOpen" />
+      <SwitchControl label="Auto Select" name="autoSelect" />
+      <SwitchControl label="Close On Blur" name="closeOnBlur" />
+      <SwitchControl label="Close On Select" name="closeOnSelect" />
       <FormControl htmlFor="placement" label="Placement">
         <Select
           id="placement"

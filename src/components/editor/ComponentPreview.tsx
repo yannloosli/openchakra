@@ -8,7 +8,7 @@ import TablePreview, {
 import AvatarPreview, {
   AvatarBadgePreview,
   AvatarGroupPreview,
-} from '~components/editor/previews/AvatarPreview'
+} from '../../components/editor/previews/AvatarPreview'
 import AccordionPreview, {
   AccordionButtonPreview,
   AccordionItemPreview,

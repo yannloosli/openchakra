@@ -1,7 +1,7 @@
 import React from 'react'
-import { useDropComponent } from '~hooks/useDropComponent'
-import { useInteractive } from '~hooks/useInteractive'
-import ComponentPreview from '~components/editor/ComponentPreview'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import { useInteractive } from 'src/hooks/useInteractive'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
 import {
     Menu,
     MenuButton,
@@ -14,7 +14,7 @@ import {
     IconButton,
     Box,
 } from '@chakra-ui/react'
-import icons from '~iconsList'
+import icons from 'src/iconsList'
 
 interface Props {
     component: IComponent
@@ -22,8 +22,8 @@ interface Props {
 }
 
 const MenuPreview = ({ component, index }: Props) => {
-    const { drop, isOver } = useDropComponent(component.id)
-    const { props, ref } = useInteractive(component, true)
+    const { props, ref } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
     let prop = { ...props }
     delete prop['isOpen']
 
@@ -34,19 +34,19 @@ const MenuPreview = ({ component, index }: Props) => {
         <Box ref={drop(ref)} index={index} {...props}>
             <Menu isOpen={props.showpreview} {...prop}>
                 {component.children.map((key: string) => (
-                    <ComponentPreview key={key} componentName={key} />
+                    <ComponentPreview key={key} index={index} componentName={key} />
                 ))}
             </Menu>
         </Box>
     )
 }
 
-export const MenuButtonPreview = ({ component }: Props) => {
-    const { drop, isOver } = useDropComponent(component.id)
+export const MenuButtonPreview = ({ component, index }: Props) => {
     const {
         props: { icon, ...props },
         ref,
-    } = useInteractive(component, true)
+    } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
 
     if (isOver) {
         props.bg = 'teal.50'
@@ -109,9 +109,9 @@ export const MenuButtonPreview = ({ component }: Props) => {
     )
 }
 
-export const MenuListPreview = ({ component }: Props) => {
-    const { drop, isOver } = useDropComponent(component.id)
-    const { props, ref } = useInteractive(component, true)
+export const MenuListPreview = ({ component, index }: Props) => {
+    const { props, ref } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
     const boxProps = { ...props }
 
     if (isOver) {
@@ -122,16 +122,16 @@ export const MenuListPreview = ({ component }: Props) => {
         <Box ref={drop(ref)} {...boxProps}>
             <MenuList {...props}>
                 {component.children.map((key: string) => (
-                    <ComponentPreview key={key} componentName={key} />
+                    <ComponentPreview key={key} index={index} componentName={key} />
                 ))}
             </MenuList>
         </Box>
     )
 }
 
-export const MenuGroupPreview = ({ component }: Props) => {
-    const { drop, isOver } = useDropComponent(component.id)
-    const { props, ref } = useInteractive(component, true)
+export const MenuGroupPreview = ({ component, index }: Props) => {
+    const { props, ref } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
 
     if (isOver) {
         props.bg = 'teal.50'
@@ -140,15 +140,15 @@ export const MenuGroupPreview = ({ component }: Props) => {
     return (
         <MenuGroup ref={drop(ref)} {...props}>
             {component.children.map((key: string) => (
-                <ComponentPreview key={key} componentName={key} />
+                <ComponentPreview key={key} index={index} componentName={key} />
             ))}
         </MenuGroup>
     )
 }
 
-export const MenuOptionGroupPreview = ({ component }: Props) => {
-    const { drop, isOver } = useDropComponent(component.id)
-    const { props, ref } = useInteractive(component, true)
+export const MenuOptionGroupPreview = ({ component, index }: Props) => {
+    const { props, ref } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
 
     if (isOver) {
         props.bg = 'teal.50'
@@ -157,18 +157,18 @@ export const MenuOptionGroupPreview = ({ component }: Props) => {
     return (
         <MenuGroup ref={drop(ref)} {...props}>
             {component.children.map((key: string) => (
-                <ComponentPreview key={key} componentName={key} />
+                <ComponentPreview key={key} index={index} componentName={key} />
             ))}
         </MenuGroup>
     )
 }
 
-export const MenuItemPreview = ({ component }: Props) => {
-    const { isOver } = useDropComponent(component.id)
+export const MenuItemPreview = ({ component, index }: Props) => {
     const {
         props: { icon, ...props },
         ref,
-    } = useInteractive(component, true)
+    } = useInteractive(component, index)
+    const { isOver } = useDropComponent(component.id, index, ref)
 
     if (isOver) {
         props.bg = 'teal.50'
@@ -186,12 +186,12 @@ export const MenuItemPreview = ({ component }: Props) => {
     return <MenuItem ref={ref} {...props} />
 }
 
-export const MenuItemOptionPreview = ({ component }: Props) => {
-    const { isOver } = useDropComponent(component.id)
+export const MenuItemOptionPreview = ({ component, index }: Props) => {
     const {
         props: { icon, ...props },
         ref,
-    } = useInteractive(component, true)
+    } = useInteractive(component, index)
+    const { isOver } = useDropComponent(component.id, index, ref)
 
     if (isOver) {
         props.bg = 'teal.50'
@@ -209,9 +209,9 @@ export const MenuItemOptionPreview = ({ component }: Props) => {
     return <MenuItemOption ref={ref} {...props} />
 }
 
-export const MenuDividerPreview = ({ component }: Props) => {
-    const { isOver } = useDropComponent(component.id)
-    const { props, ref } = useInteractive(component, true)
+export const MenuDividerPreview = ({ component, index }: Props) => {
+    const { props, ref } = useInteractive(component, index)
+    const { isOver } = useDropComponent(component.id, index, ref)
 
     if (isOver) {
         props.bg = 'teal.50'

@@ -9,8 +9,8 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { NewThemeType } from '~core/models/customComponents'
-import useDispatch from '~hooks/useDispatch'
+import { NewThemeType } from 'src/core/models/customComponents'
+import useDispatch from 'src/hooks/useDispatch'
 
 const ThemeFonts = ({ themeState }: { themeState: NewThemeType }) => {
   const dispatch = useDispatch()

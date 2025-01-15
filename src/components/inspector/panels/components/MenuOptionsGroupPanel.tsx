@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import { Select } from '@chakra-ui/react'
-import TextControl from '~components/inspector/controls/TextControl'
-import FormControl from '~components/inspector/controls/FormControl'
-import { useForm } from '~hooks/useForm'
-import usePropsSelector from '~hooks/usePropsSelector'
+import TextControl from 'src/components/inspector/controls/TextControl'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import { useForm } from 'src/hooks/useForm'
+import usePropsSelector from 'src/hooks/usePropsSelector'
 
 const MenuOptionsGroupPanel = () => {
   const { setValueFromEvent } = useForm()

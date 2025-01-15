@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, KeyboardEvent } from 'react'
 import { Input } from '@chakra-ui/react'
-import useDispatch from '~hooks/useDispatch'
-import { useForm } from '~hooks/useForm'
-import usePropsSelector from '~hooks/usePropsSelector'
+import useDispatch from 'src/hooks/useDispatch'
+import { useForm } from 'src/hooks/useForm'
+import usePropsSelector from 'src/hooks/usePropsSelector'
 import { useSelector } from 'react-redux'
-import { getInputTextFocused } from '~core/selectors/app'
+import { getInputTextFocused } from 'src/core/selectors/app'
 import FormControl from './FormControl'
 
 const ChildrenControl: React.FC = () => {

@@ -1,7 +1,7 @@
 import React from 'react'
-import { useDropComponent } from '~hooks/useDropComponent'
-import { useInteractive } from '~hooks/useInteractive'
-import ComponentPreview from '~components/editor/ComponentPreview'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import { useInteractive } from 'src/hooks/useInteractive'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
 import { Tooltip, Box } from '@chakra-ui/react'
 
 interface Props {
@@ -10,8 +10,8 @@ interface Props {
 }
 
 const TooltipPreview = ({ component, index }: Props) => {
-    const { drop, isOver } = useDropComponent(component.id)
-    const { props, ref } = useInteractive(component, true)
+    const { props, ref } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
 
     if (isOver) {
         props.bg = 'teal.50'
@@ -20,7 +20,7 @@ const TooltipPreview = ({ component, index }: Props) => {
     return component.children.length > 0 ? (
         <Tooltip ref={drop(ref)} index={index} {...props}>
             <span>
-                <ComponentPreview componentName={component.children[0]} />
+                <ComponentPreview componentName={component.children[0]} index={index} />
             </span>
         </Tooltip>
     ) : (

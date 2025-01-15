@@ -20,28 +20,28 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { CopyIcon, CheckIcon, EditIcon } from '@chakra-ui/icons'
-import Panels from '~components/inspector/panels/Panels'
+import Panels from 'src/components/inspector/panels/Panels'
 import { GoRepo, GoCode } from 'react-icons/go'
 import { FiTrash2 } from 'react-icons/fi'
 import { IoMdRefresh } from 'react-icons/io'
 import { useSelector } from 'react-redux'
-import useDispatch from '~hooks/useDispatch'
-import StylesPanel from '~components/inspector/panels/StylesPanel'
+import useDispatch from 'src/hooks/useDispatch'
+import StylesPanel from 'src/components/inspector/panels/StylesPanel'
 import {
   getSelectedComponent,
   getComponents,
   getSelectedComponentId,
   getComponentNames,
-} from '~core/selectors/components'
+} from 'src/core/selectors/components'
 import ActionButton from './ActionButton'
-import { generateComponentCode, formatCode } from '~utils/code'
-import useClipboard from '~hooks/useClipboard'
-import { useInspectorUpdate } from '~contexts/inspector-context'
-import { componentsList } from '~componentsList'
+import { generateComponentCode, formatCode } from 'src/utils/code'
+import useClipboard from 'src/hooks/useClipboard'
+import { useInspectorUpdate } from 'src/contexts/inspector-context'
+import { componentsList } from 'src/componentsList'
 import {
   getCustomComponentNames,
-} from '~core/selectors/customComponents'
-import { ComponentWithRefs } from '~custom-components/refComponents'
+} from 'src/core/selectors/customComponents'
+import { ComponentWithRefs } from 'src/custom-components/refComponents'
 
 const CodeActionButton = memo(() => {
   const [isLoading, setIsLoading] = useState(false)

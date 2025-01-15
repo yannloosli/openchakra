@@ -1,13 +1,13 @@
 import React, { memo } from 'react'
 import { Select, Input } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
-import { useForm } from '~hooks/useForm'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SizeControl from '~components/inspector/controls/SizeControl'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import ChildrenControl from '~components/inspector/controls/ChildrenControl'
-import IconControl from '~components/inspector/controls/IconControl'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import { useForm } from 'src/hooks/useForm'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SizeControl from 'src/components/inspector/controls/SizeControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import ChildrenControl from 'src/components/inspector/controls/ChildrenControl'
+import IconControl from 'src/components/inspector/controls/IconControl'
 
 const MenuButtonPanel = () => {
   const { setValueFromEvent } = useForm()

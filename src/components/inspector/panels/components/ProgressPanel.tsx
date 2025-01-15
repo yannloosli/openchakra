@@ -5,12 +5,12 @@ import {
   Slider,
   SliderThumb,
 } from '@chakra-ui/react'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import FormControl from '~components/inspector/controls/FormControl'
-import { useForm } from '~hooks/useForm'
-import SizeControl from '~components/inspector/controls/SizeControl'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import { useForm } from 'src/hooks/useForm'
+import SizeControl from 'src/components/inspector/controls/SizeControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
 
 const ProgressPanel = () => {
   const { setValue } = useForm()

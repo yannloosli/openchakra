@@ -12,7 +12,7 @@ app.bootstrap({
   excludeExternals: true
 });
 
-//node_modules/@chakra-ui/core/dist/theme/icons.d.ts
+//node_modules/@chakra-ui/react/dist/theme/icons.d.ts
 const COMPONENTS = [
   "Badge",
   "Checkbox",
@@ -29,7 +29,7 @@ const COMPONENTS = [
 const project = app.convert(
   app.expandInputFiles(
     COMPONENTS.map(
-      name => `../node_modules/@chakra-ui/core/dist/${name}/index.d.ts`
+      name => `../node_modules/@chakra-ui/react/dist/${name}/index.d.ts`
     )
   )
 );

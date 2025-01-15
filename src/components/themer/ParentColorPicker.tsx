@@ -21,7 +21,7 @@ import {
   SliderThumb,
 } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import useDispatch from '~hooks/useDispatch'
+import useDispatch from 'src/hooks/useDispatch'
 import { themeColors } from '../editor/Editor'
 
 const ColorSchemePicker = ({

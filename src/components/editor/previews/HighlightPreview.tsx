@@ -1,9 +1,9 @@
 import React from 'react'
-import { useInteractive } from '~hooks/useInteractive'
+import { useInteractive } from 'src/hooks/useInteractive'
 import { Box, Highlight } from '@chakra-ui/react'
 
-const HighlightPreview: React.FC<IPreviewProps> = ({ component }) => {
-  const { props, ref } = useInteractive(component, true, true)
+const HighlightPreview: React.FC<IPreviewProps> = ({ component, index }) => {
+  const { props, ref } = useInteractive(component, index, true)
 
   return (
     <Box {...props} ref={ref}>

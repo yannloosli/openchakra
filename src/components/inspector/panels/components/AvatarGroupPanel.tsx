@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from 'src/components/inspector/controls/FormControl'
 import {
   SliderTrack,
   SliderThumb,
@@ -12,8 +12,8 @@ import {
   Select,
   Slider,
 } from '@chakra-ui/react'
-import { useForm } from '~hooks/useForm'
-import usePropsSelector from '~hooks/usePropsSelector'
+import { useForm } from 'src/hooks/useForm'
+import usePropsSelector from 'src/hooks/usePropsSelector'
 
 const AvatarGroupPanel = () => {
   const { setValue, setValueFromEvent } = useForm()

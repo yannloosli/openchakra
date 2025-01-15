@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
-import { useInteractive } from '~hooks/useInteractive'
-import iconsList from '~iconsList'
+import { useInteractive } from 'src/hooks/useInteractive'
+import iconsList from 'src/iconsList'
 import { Select } from '@chakra-ui/react'
 
 interface IProps {

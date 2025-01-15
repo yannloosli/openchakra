@@ -8,7 +8,7 @@ import {
   Flex,
   Slider,
 } from '@chakra-ui/react'
-import ParamSelector from '~custom-components/paramSelector'
+import ParamSelector from 'src/custom-components/paramSelector'
 
 type HuesPickerPropType = {
   name: string

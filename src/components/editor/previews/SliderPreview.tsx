@@ -1,8 +1,8 @@
 import React from 'react'
-import { useInteractive } from '~hooks/useInteractive'
-import ComponentPreview from '~components/editor/ComponentPreview'
+import { useInteractive } from 'src/hooks/useInteractive'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
 import { Slider, Box } from '@chakra-ui/react'
-import { useDropComponent } from '~hooks/useDropComponent'
+import { useDropComponent } from 'src/hooks/useDropComponent'
 
 const acceptedTypesStat: ComponentType[] = [
   'SliderTrack',

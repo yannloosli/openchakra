@@ -1,10 +1,10 @@
 import React, { FunctionComponent, ComponentClass } from 'react'
-import { useInteractive } from '~hooks/useInteractive'
-import { useDropComponent } from '~hooks/useDropComponent'
-import ComponentPreview from '~components/editor/ComponentPreview'
+import { useInteractive } from 'src/hooks/useInteractive'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
 import { Box } from '@chakra-ui/react'
 import { useSelector } from 'react-redux'
-import { getIsSortHovered } from '~core/selectors/components'
+import { getIsSortHovered } from 'src/core/selectors/components'
 
 const WithChildrenPreviewContainer: React.FC<{
   component: IComponent

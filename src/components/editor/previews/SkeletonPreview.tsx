@@ -1,69 +1,69 @@
 import React from 'react'
 import { Box, Skeleton, SkeletonCircle, SkeletonText } from '@chakra-ui/react'
-import ComponentPreview from '~components/editor/ComponentPreview'
-import { useDropComponent } from '~hooks/useDropComponent'
-import { useInteractive } from '~hooks/useInteractive'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import { useInteractive } from 'src/hooks/useInteractive'
 
 const SkeletonPreview: React.FC<{ component: IComponent, index: number }> = ({
-  component,
-  index
+    component,
+    index
 }) => {
-  const { drop, isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true, true)
+    const { props, ref } = useInteractive(component, index, true)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return (
-    <Box ref={drop(ref)} {...props} m={0}>
-      <Skeleton {...component.props}>
-        {component.children.map((key: string) => (
-          <ComponentPreview key={key} componentName={key} />
-        ))}
-      </Skeleton>
-    </Box>
-  )
+    return (
+        <Box ref={drop(ref)} {...props} m={0}>
+            <Skeleton {...component.props}>
+                {component.children.map((key: string) => (
+                    <ComponentPreview key={key} index={index} componentName={key} />
+                ))}
+            </Skeleton>
+        </Box>
+    )
 }
 
-export const SkeletonTextPreview = ({ component }: IPreviewProps) => {
-  const { props, ref } = useInteractive(component, true)
-  const { drop, isOver } = useDropComponent(component.id)
+export const SkeletonTextPreview = ({ component, index }: IPreviewProps) => {
+    const { props, ref } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
 
-  let boxProps: any = {}
+    let boxProps: any = {}
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return (
-    <Box ref={drop(ref)} {...boxProps}>
-      <SkeletonText {...props}>
-        {component.children.map((key: string) => (
-          <ComponentPreview key={key} componentName={key} />
-        ))}
-      </SkeletonText>
-    </Box>
-  )
+    return (
+        <Box ref={drop(ref)} {...boxProps}>
+            <SkeletonText {...props}>
+                {component.children.map((key: string) => (
+                    <ComponentPreview key={key} index={index} componentName={key} />
+                ))}
+            </SkeletonText>
+        </Box>
+    )
 }
 
-export const SkeletonCirclePreview = ({ component }: IPreviewProps) => {
-  const { props, ref } = useInteractive(component, true, true)
-  const { drop, isOver } = useDropComponent(component.id)
+export const SkeletonCirclePreview = ({ component, index }: IPreviewProps) => {
+    const { props, ref } = useInteractive(component, index, true)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
 
-  if (isOver) {
-    props.bg = 'teal.50'
-  }
+    if (isOver) {
+        props.bg = 'teal.50'
+    }
 
-  return (
-    <Box display="inline-block" ref={drop(ref)} index={index} {...props}>
-      <SkeletonCircle {...component.props}>
-        {component.children.map((key: string) => (
-          <ComponentPreview key={key} componentName={key} />
-        ))}
-      </SkeletonCircle>
-    </Box>
-  )
+    return (
+        <Box display="inline-block" ref={drop(ref)} index={index} {...props}>
+            <SkeletonCircle {...component.props}>
+                {component.children.map((key: string) => (
+                    <ComponentPreview key={key} index={index} componentName={key} />
+                ))}
+            </SkeletonCircle>
+        </Box>
+    )
 }
 
 export default SkeletonPreview

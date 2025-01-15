@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
-import TextControl from '~components/inspector/controls/TextControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
+import TextControl from 'src/components/inspector/controls/TextControl'
 
 const LoopPanel = () => {
   return (

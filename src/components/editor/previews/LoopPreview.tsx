@@ -1,12 +1,12 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-import ComponentPreview from '~components/editor/ComponentPreview'
-import { useDropComponent } from '~hooks/useDropComponent'
-import { useInteractive } from '~hooks/useInteractive'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import { useInteractive } from 'src/hooks/useInteractive'
 
 const LoopPreview: React.FC<{ component: IComponent, index: number }> = ({ component, index }) => {
-  const { drop, isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+    const { props, ref } = useInteractive(component, index)
+    const { drop, isOver } = useDropComponent(component.id, index, ref)
   if (isOver) {
     props.bg = 'teal.50'
   }
@@ -29,14 +29,14 @@ const LoopPreview: React.FC<{ component: IComponent, index: number }> = ({ compo
       {!props.loopView ? (
         <>
           {component.children.map((key: string) => (
-            <ComponentPreview key={key} componentName={key} />
+            <ComponentPreview key={key} index={index} componentName={key} />
           ))}
         </>
       ) : loopLength && loopLength > 0 ? (
         <>
           {loopArray.map(() =>
             component.children.map((key: string) => (
-              <ComponentPreview key={key} componentName={key} />
+              <ComponentPreview key={key} index={index} componentName={key} />
             )),
           )}
         </>
@@ -44,7 +44,7 @@ const LoopPreview: React.FC<{ component: IComponent, index: number }> = ({ compo
         <>
           {[1, 2, 3, 4].map(() =>
             component.children.map((key: string) => (
-              <ComponentPreview key={key} componentName={key} />
+              <ComponentPreview key={key} index={index} componentName={key} />
             )),
           )}
         </>

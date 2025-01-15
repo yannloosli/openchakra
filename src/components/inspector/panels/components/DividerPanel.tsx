@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import { Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
-import { useForm } from '~hooks/useForm'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import usePropsSelector from '~hooks/usePropsSelector'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import { useForm } from 'src/hooks/useForm'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
 
 const DividerPanel = () => {
   const { setValueFromEvent } = useForm()

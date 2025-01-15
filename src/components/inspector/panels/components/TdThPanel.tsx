@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import ChildrenControl from '~components/inspector/controls/ChildrenControl'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
+import ChildrenControl from 'src/components/inspector/controls/ChildrenControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
 
 const TdThPanel = () => {
   return (

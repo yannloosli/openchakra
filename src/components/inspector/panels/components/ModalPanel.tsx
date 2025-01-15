@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
-import { useForm } from '~hooks/useForm'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SizeControl from '~components/inspector/controls/SizeControl'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
+import { useForm } from 'src/hooks/useForm'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SizeControl from 'src/components/inspector/controls/SizeControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
 import { Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
+import FormControl from 'src/components/inspector/controls/FormControl'
 
 const ModalPanel = () => {
   const { setValueFromEvent } = useForm()

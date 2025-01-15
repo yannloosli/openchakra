@@ -17,8 +17,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getNewTheme } from '~core/selectors/customComponents'
-import ThemeCustomStyles from './CustomStyles'
+import { getNewTheme } from 'src/core/selectors/customComponents'
 import ThemeColorPalette from './ThemeColorPalette'
 import ThemeFonts from './ThemeFonts'
 import { GiLargePaintBrush } from 'react-icons/gi'
@@ -85,18 +84,6 @@ const Themer = () => {
                     Fonts
                   </Tooltip>
                 </Tab>
-                <Divider />
-                <Tab>
-                  <Tooltip
-                    label="Create your own custom styles"
-                    fontFamily="sans-serif"
-                    fontSize="sm"
-                    hasArrow
-                    placement="right"
-                  >
-                    Custom Styles
-                  </Tooltip>
-                </Tab>
               </TabList>
               <TabPanels>
                 <TabPanel>
@@ -104,9 +91,6 @@ const Themer = () => {
                 </TabPanel>
                 <TabPanel>
                   <ThemeFonts themeState={newThemeState} />
-                </TabPanel>
-                <TabPanel>
-                  <ThemeCustomStyles />
                 </TabPanel>
               </TabPanels>
             </Tabs>

@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
 import { Select } from '@chakra-ui/react'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import { useForm } from '~hooks/useForm'
-import FormControl from '~components/inspector/controls/FormControl'
-import usePropsSelector from '~hooks/usePropsSelector'
-import TextControl from '~components/inspector/controls/TextControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import { useForm } from 'src/hooks/useForm'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import TextControl from 'src/components/inspector/controls/TextControl'
 
 const SpinnerPanel = () => {
   const { setValueFromEvent } = useForm()

@@ -1,7 +1,7 @@
 import React from 'react'
-import { useInteractive } from '~hooks/useInteractive'
-import { useDropComponent } from '~hooks/useDropComponent'
-import ComponentPreview from '~components/editor/ComponentPreview'
+import { useInteractive } from 'src/hooks/useInteractive'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
 import { Box, Breadcrumb } from '@chakra-ui/react'
 
 const BreadcrumbPreview: React.FC<IPreviewProps> = ({ component, index }) => {

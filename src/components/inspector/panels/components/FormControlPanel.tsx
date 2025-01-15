@@ -1,5 +1,5 @@
 import React from 'react'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
 
 const FormControlPanel = () => {
   return (

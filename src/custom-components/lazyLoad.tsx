@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { convertToPascal } from '~components/editor/Editor'
+import { convertToPascal } from 'src/components/editor/Editor'
 
 const importView = (component: any, isPreview: boolean) => {
   component = convertToPascal(component)

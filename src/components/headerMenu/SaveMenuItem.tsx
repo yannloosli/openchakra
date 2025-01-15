@@ -1,5 +1,5 @@
 import React from 'react'
-import { MenuItem, Box } from '@chakra-ui/core'
+import { MenuItem, Box } from '@chakra-ui/react'
 import { FaSave } from 'react-icons/fa'
 
 interface Props {

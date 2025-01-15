@@ -1,11 +1,11 @@
 import { createModel } from '@rematch/core'
 import produce from 'immer'
-import { DEFAULT_PROPS } from '~utils/defaultProps'
-import templates, { TemplateType } from '~templates'
-import { generateId } from '~utils/generateId'
-import { duplicateComponent, deleteComponent } from '~utils/recursive'
+import { DEFAULT_PROPS } from 'src/utils/defaultProps'
+import templates, { TemplateType } from 'src/templates'
+import { generateId } from 'src/utils/generateId'
+import { duplicateComponent, deleteComponent } from 'src/utils/recursive'
 import omit from 'lodash/omit'
-import { ComponentWithRefs } from '~custom-components/refComponents'
+import { ComponentWithRefs } from 'src/custom-components/refComponents'
 
 export type ComponentsState = {
   components: IComponents

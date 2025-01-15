@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { getSelectedComponentChildren } from '~core/selectors/components'
-import ElementsList from '~components/inspector/elements-list/ElementsList'
-import useDispatch from '~hooks/useDispatch'
+import { getSelectedComponentChildren } from 'src/core/selectors/components'
+import ElementsList from 'src/components/inspector/elements-list/ElementsList'
+import useDispatch from 'src/hooks/useDispatch'
 
 const ChildrenInspector = () => {
   const childrenComponent = useSelector(getSelectedComponentChildren)
@@ -14,9 +14,9 @@ const ChildrenInspector = () => {
     toIndex: number,
   ) => {
     dispatch.components.moveSelectedComponentChildren({
-      componentId,
-      fromIndex,
-      toIndex,
+      droppedId: componentId,
+      targetId: childrenComponent[toIndex].id,
+      position: `${fromIndex}-${toIndex}`,
     })
   }
 

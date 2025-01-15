@@ -1,13 +1,13 @@
 import React from 'react'
 import { Box } from '@chakra-ui/react'
-import ComponentPreview from '~components/editor/ComponentPreview'
-import { useDropComponent } from '~hooks/useDropComponent'
-import { useInteractive } from '~hooks/useInteractive'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import { useInteractive } from 'src/hooks/useInteractive'
 
-const ConditionalPreview: React.FC<IPreviewProps> = ({ component }) => {
+const ConditionalPreview: React.FC<IPreviewProps> = ({ component, index }) => {
   const acceptedTypes = ['Box'] as ComponentType[]
-  const { props, ref } = useInteractive(component, true)
-  const { drop, isOver } = useDropComponent(component.id, acceptedTypes)
+  const { props, ref } = useInteractive(component, index)
+  const { drop, isOver } = useDropComponent(component.id, index, ref, acceptedTypes)
 
   if (isOver) {
     props.bg = 'teal.50'
@@ -17,13 +17,13 @@ const ConditionalPreview: React.FC<IPreviewProps> = ({ component }) => {
     <Box pos="relative" {...props} ref={drop(ref)}>
       {props.show === 'show-both' || props.show === undefined ? (
         <>
-          <ComponentPreview componentName={component?.children[0]} />
-          <ComponentPreview componentName={component?.children[1]} />
+          <ComponentPreview index={index} componentName={component?.children[0]} />
+          <ComponentPreview index={index} componentName={component?.children[1]} />
         </>
       ) : props.show === 'show-true' ? (
-        <ComponentPreview componentName={component?.children[0]} />
+        <ComponentPreview index={index} componentName={component?.children[0]} />
       ) : (
-        <ComponentPreview componentName={component?.children[1]} />
+        <ComponentPreview index={index} componentName={component?.children[1]} />
       )}
     </Box>
   )

@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import TextControl from '~components/inspector/controls/TextControl'
+import TextControl from 'src/components/inspector/controls/TextControl'
 
 const BreadcrumbPanel = () => {
   return (

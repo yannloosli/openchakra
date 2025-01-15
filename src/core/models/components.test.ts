@@ -1,5 +1,5 @@
 import components, { ComponentsState, INITIAL_COMPONENTS } from './components'
-import { onboarding } from '~templates/onboarding'
+import { onboarding } from 'src/templates/onboarding'
 import produce from 'immer'
 
 const STATE: ComponentsState = {
@@ -159,8 +159,9 @@ describe('Components model', () => {
       const nextState = components.reducers.moveSelectedComponentChildren(
         draftState,
         {
-          fromIndex: 0,
-          toIndex: 1,
+          droppedId: 'button-testid',
+          targetId: 'box-testid',
+          position: 'inside',
         },
       )
 

@@ -1,15 +1,10 @@
 <div align="center" style="display:flex;flex-direction:column;">
-  <a href="https://openchakra.app">
-    <img src="./public/images/github-banner.png" alt="Openchakra: Visual editor for Chakra UI." />
-  </a>
-  <h3>Visual Editor for Chakra UI</h3>
+    <img src="./public/karmyc_logo.svg" alt="Openchakra: Visual editor for Chakra UI." />
+  <h3>Multi Purpose Visual Editor</h3>
 </div>
 
-OpenChakra is a visual editor for the best component library in town: [Chakra UI](https://chakra-ui.com) 🤗. Quickly draft components with the simple drag and drop UI.
+Karmyc is a visual editor. It was forked from the very cool and standalone [OpenChakra](https://github.com/premieroctet/openchakra) in the first place. I've gathered all improvements I've found in various forks and make the tool a React component.
 
-👉 [https://openchakra.app](https://openchakra.app)
-
-**Note:** Forked from https://github.com/premieroctet/openchakra - which is not currently maintained.
 
 ## Features
 
@@ -21,7 +16,21 @@ OpenChakra is a visual editor for the best component library in town: [Chakra UI
 - 🔮 Undo/redo edit
 - 💽 Localstorage sync
 
-[![Screenshot](./public/images/screenshot.png)](https://openchakra.app)
+## Roadmap
+### To come
+- Inject components and config
+- Chakra UI V3 migration
+- (wip)
+### Item unherited from OpenChakra roadmap
+- More Chakra UI components integration
+- Components copy
+- Props panel improvements
+- Code generation improvements
+- Dark mode support
+- Custom presets
+- Custom theme
+- Handle PseudoBox state (hover, active…)
+- Fix bugs 🧨
 
 ## Getting started
 
@@ -76,25 +85,16 @@ By clicking on a component containing children, you will see a Children panel ap
 | `p`              | Select parent component   |
 | `Esc`            | Unselect component        |
 
-## Roadmap
-
-- More Chakra UI components integration
-- Components copy
-- Props panel improvements
-- Code generation improvements
-- Dark mode support
-- Custom presets
-- Custom theme
-- Handle PseudoBox state (hover, active…)
-- Fix bugs 🧨
-- Support other UI (Material, Reakit...)
-
-## Contributors
-
-This project is being developed by [Premier Octet](https://www.premieroctet.com), a Web and mobile agency specializing in React and React Native developments.
+## Other information
+### FAQ
+- Why this name ? \
+This component is heavely based on [OpenChakra](https://github.com/premieroctet/openchakra), itself relying on [Chakra UI](https://chakra-ui.com/getting-started). Chakra, chained things, inheritance... Karma. Moreover, I've worked on an OpenChakra integration in a previous job andd even if I'm making this one from scratch, it's obvious I would not do this now without this prior experience (well, maybe not, it was perhaps some kind of destiny thing! Or not.)
+- But why karm**Y**c ? \
+Glad you ask. \
+Mainly two reasons: \
+  1. there's already a Github project with Karmic label.
+  2. My name is **Y**ann.
 
 ### Code Contributors
 
-This project exists thanks to all the people from `premieroctet/openchakra` who originally created and supported this project. 
-
-New collaborators are welcome! [[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the people from [Premier Octet](https://www.premieroctet.com) who originally created and supported this project. 

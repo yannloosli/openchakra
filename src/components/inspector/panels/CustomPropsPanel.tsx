@@ -1,9 +1,9 @@
 import React, { memo, useState, FormEvent, ChangeEvent, useRef } from 'react'
-import { useInspectorState } from '~contexts/inspector-context'
+import { useInspectorState } from 'src/contexts/inspector-context'
 import {
   getComponentParamNames,
   getSelectedComponent,
-} from '~core/selectors/components'
+} from 'src/core/selectors/components'
 import { useSelector } from 'react-redux'
 import {
   IconButton,
@@ -22,8 +22,8 @@ import {
   Portal,
 } from '@chakra-ui/react'
 import { ChevronDownIcon, EditIcon, SmallCloseIcon } from '@chakra-ui/icons'
-import useDispatch from '~hooks/useDispatch'
-import { useForm } from '~hooks/useForm'
+import useDispatch from 'src/hooks/useDispatch'
+import { useForm } from 'src/hooks/useForm'
 
 const CustomPropsPanel = () => {
   const dispatch = useDispatch()

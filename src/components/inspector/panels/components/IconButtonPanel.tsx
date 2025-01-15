@@ -1,10 +1,10 @@
 import React, { memo } from 'react'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import VariantsControl from '~components/inspector/controls/VariantsControl'
-import SizeControl from '~components/inspector/controls/SizeControl'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
-import IconControl from '~components/inspector/controls/IconControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import VariantsControl from 'src/components/inspector/controls/VariantsControl'
+import SizeControl from 'src/components/inspector/controls/SizeControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
+import IconControl from 'src/components/inspector/controls/IconControl'
 
 const IconButtonPanel = () => {
   const size = usePropsSelector('size')

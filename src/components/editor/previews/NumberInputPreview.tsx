@@ -1,5 +1,5 @@
 import React from 'react'
-import { useInteractive } from '~hooks/useInteractive'
+import { useInteractive } from 'src/hooks/useInteractive'
 import {
   NumberInput,
   NumberInputField,

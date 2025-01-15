@@ -1,17 +1,17 @@
-import React, { memo, useState, useEffect } from 'react'
+import React, { memo, useState, useEffect, useRef } from 'react'
 import { Box, Text, Link, theme as baseTheme, ChakraProvider } from '@chakra-ui/react'
-import { useDropComponent } from '~hooks/useDropComponent'
+import { useDropComponent } from 'src/hooks/useDropComponent'
 import SplitPane, { Pane } from 'split-pane-react'
-import CodePanel from '~components/CodePanel'
+import CodePanel from 'src/components/CodePanel'
 import { useSelector } from 'react-redux'
-import useDispatch from '~hooks/useDispatch'
-import { getComponents } from '~core/selectors/components'
-import { getNewTheme } from '~core/selectors/customComponents'
-import { getShowLayout, getShowCode } from '~core/selectors/app'
-import ComponentPreview from '~components/editor/ComponentPreview'
+import useDispatch from 'src/hooks/useDispatch'
+import { getComponents } from 'src/core/selectors/components'
+import { getNewTheme } from 'src/core/selectors/customComponents'
+import { getShowLayout, getShowCode } from 'src/core/selectors/app'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
 import { omit } from 'lodash'
 import myTheme from './myTheme'
-import Fonts from '~components/Fonts'
+import Fonts from 'src/components/Fonts'
 
 export const themeColors: any = Object.keys(
     omit(baseTheme.colors, ['transparent', 'current', 'black', 'white']),
@@ -41,8 +41,9 @@ const Editor: React.FC = () => {
     const components = useSelector(getComponents)
     const newThemeState = useSelector(getNewTheme)
     const dispatch = useDispatch()
+    const ref = useRef(null)
 
-    const { drop } = useDropComponent('root', 0)
+    const { drop } = useDropComponent('root', 0, ref)
     const isEmpty = !components.root.children.length
     const rootProps = components.root.props
 
@@ -63,10 +64,10 @@ const Editor: React.FC = () => {
 
     const Playground = (
         <ChakraProvider theme={myTheme(newThemeState)} resetCSS={false}>
-            <Fonts
+            {/* <Fonts
                 headingFontFamily={newThemeState.headingFontFamily}
                 bodyFontFamily={newThemeState.bodyFontFamily}
-            />
+            /> */}
             <Box
                 className="editor"
                 bg="chakra-body-bg"
@@ -82,7 +83,8 @@ const Editor: React.FC = () => {
                 justifyContent="center"
                 alignItems="center"
                 overflow="auto"
-                ref={drop}
+                // @ts-expect-error ref is not assignable to type
+                ref={drop(ref)}
                 position="relative"
                 flexDirection="column"
                 onClick={onSelectBackground}

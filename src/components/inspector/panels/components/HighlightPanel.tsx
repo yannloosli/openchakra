@@ -1,6 +1,6 @@
 import { memo } from 'react'
-import ChildrenControl from '~components/inspector/controls/ChildrenControl'
-import TextControl from '~components/inspector/controls/TextControl'
+import ChildrenControl from 'src/components/inspector/controls/ChildrenControl'
+import TextControl from 'src/components/inspector/controls/TextControl'
 
 const HighlightPanel = () => (
   <>

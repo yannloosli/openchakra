@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
-import { useForm } from '~hooks/useForm'
+import { useForm } from 'src/hooks/useForm'
 import { Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SizeControl from '~components/inspector/controls/SizeControl'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
-import TextControl from '~components/inspector/controls/TextControl'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SizeControl from 'src/components/inspector/controls/SizeControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
+import TextControl from 'src/components/inspector/controls/TextControl'
 
 const InputPanel = () => {
   const { setValueFromEvent } = useForm()

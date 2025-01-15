@@ -2,9 +2,9 @@ import React, { ReactNode, useState, memo, useEffect } from 'react'
 import { Box, Select, Button, IconButton, Checkbox } from '@chakra-ui/react'
 import { SmallCloseIcon } from '@chakra-ui/icons'
 import FormControl from './FormControl'
-import { useForm } from '~hooks/useForm'
+import { useForm } from 'src/hooks/useForm'
 import ColorPickerControl from './ColorPickerControl'
-import usePropsSelector from '~hooks/usePropsSelector'
+import usePropsSelector from 'src/hooks/usePropsSelector'
 
 export type Gradient =
   | 'to top'

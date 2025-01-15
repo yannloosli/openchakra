@@ -1,5 +1,5 @@
 import { extendTheme, theme as baseTheme } from '@chakra-ui/react'
-import { NewThemeType } from '~core/models/customComponents'
+import { NewThemeType } from 'src/core/models/customComponents'
 
 const myTheme = (themeState: NewThemeType) =>
   extendTheme({

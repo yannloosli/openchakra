@@ -8,7 +8,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@chakra-ui/theme'
 
 import ComponentPreview from './ComponentPreview'
-import { storeConfig } from '~core/store'
+import { storeConfig } from 'src/core/store'
 
 function renderWithRedux(
   components: React.ReactNode,

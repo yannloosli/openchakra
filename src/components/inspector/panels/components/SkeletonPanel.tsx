@@ -1,9 +1,9 @@
 import { memo } from 'react'
-import ColorPickerControl from '~components/inspector/controls/ColorPickerControl'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
-import TextControl from '~components/inspector/controls/TextControl'
-import usePropsSelector from '~hooks/usePropsSelector'
+import ColorPickerControl from 'src/components/inspector/controls/ColorPickerControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
+import TextControl from 'src/components/inspector/controls/TextControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
 
 interface SkeletonPanelProps {
   isSkeletonText?: boolean

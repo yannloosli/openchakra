@@ -1,6 +1,6 @@
 import { createModel } from '@rematch/core'
 import produce from 'immer'
-import { convertToPascal } from '~components/editor/Editor'
+import { convertToPascal } from 'src/components/editor/Editor'
 
 export interface CustomDictionary {
   [Key: string]: string

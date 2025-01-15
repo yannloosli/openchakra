@@ -1,6 +1,6 @@
 import React, { memo } from 'react'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import ChildrenControl from '~components/inspector/controls/ChildrenControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import ChildrenControl from 'src/components/inspector/controls/ChildrenControl'
 
 const CodePanel = () => {
   return (

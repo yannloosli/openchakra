@@ -1,13 +1,13 @@
 import { useDrop, DropTargetMonitor, XYCoord } from 'react-dnd'
 import { useSelector } from 'react-redux'
-import builder from '~core/models/composer/builder'
-import { getSortPosition } from '~core/selectors/components'
-import { RootState } from '~core/store'
-import { rootComponents } from '~utils/editor'
+import builder from 'src/core/models/composer/builder'
+import { getSortPosition } from 'src/core/selectors/components'
+import { RootState } from 'src/core/store'
+import { rootComponents } from 'src/utils/editor'
 import useDispatch from './useDispatch'
 import {
   getCustomComponentNames,
-} from '~core/selectors/customComponents'
+} from 'src/core/selectors/customComponents'
 
 export const useDropComponent = (
   componentId: string,
@@ -43,7 +43,7 @@ export const useDropComponent = (
     collect: monitor => ({
       isOver: monitor.isOver({ shallow: true }) && monitor.canDrop(),
     }),
-    hover: (item, monitor) => {
+    hover: (item: ComponentItemProps, monitor) => {
       if (!ref?.current) {
         return
       }

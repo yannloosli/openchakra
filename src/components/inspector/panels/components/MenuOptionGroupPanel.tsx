@@ -1,6 +1,6 @@
 import React from 'react'
 import FormControl from '../../controls/FormControl'
-import { Input, Select } from '@chakra-ui/core'
+import { Input, Select } from '@chakra-ui/react'
 import { useForm } from '../../../../hooks/useForm'
 import usePropsSelector from '../../../../hooks/usePropsSelector'
 

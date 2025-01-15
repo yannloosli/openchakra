@@ -1,8 +1,8 @@
 import isBoolean from 'lodash/isBoolean'
 import filter from 'lodash/filter'
-import icons from '~iconsList'
-import { CustomDictionary } from '~core/models/customComponents'
-import { convertToPascal } from '~components/editor/Editor'
+import icons from 'src/iconsList'
+import { CustomDictionary } from 'src/core/models/customComponents'
+import { convertToPascal } from 'src/components/editor/Editor'
 
 const capitalize = (value: string) => {
   return value.charAt(0).toUpperCase() + value.slice(1)
@@ -690,20 +690,20 @@ export const generateICPanel = async (
   let code = `import React, { memo } from 'react'
   ${
     boolArray.length > 0
-      ? `import SwitchControl from '~components/inspector/controls/SwitchControl'`
+      ? `import SwitchControl from 'src/components/inspector/controls/SwitchControl'`
       : ``
   }
   ${
     textArray.length > 0
-      ? `import TextControl from '~components/inspector/controls/TextControl'`
+      ? `import TextControl from 'src/components/inspector/controls/TextControl'`
       : ``
   }
   ${
     enumArray.length > 0
       ? `import { Select } from '@chakra-ui/react'
-  import FormControl from '~components/inspector/controls/FormControl'
-  import { useForm } from '~hooks/useForm'
-  import usePropsSelector from '~hooks/usePropsSelector'`
+  import FormControl from 'src/components/inspector/controls/FormControl'
+  import { useForm } from 'src/hooks/useForm'
+  import usePropsSelector from 'src/hooks/usePropsSelector'`
       : ``
   }
 
@@ -736,8 +736,8 @@ export const generatePreview = async (
   const paramsContent = destructureParams(components.root.params)
 
   code = `import React from 'react'
-  import { useDropComponent } from '~hooks/useDropComponent'
-  import { useInteractive } from '~hooks/useInteractive'
+  import { useDropComponent } from 'src/hooks/useDropComponent'
+  import { useInteractive } from 'src/hooks/useInteractive'
   import { Box } from "@chakra-ui/react";
 
   ${`import { ${fileName} } from 'src/custom-components/customOcTsx/${selectedComponent}';`}
@@ -753,9 +753,9 @@ export const generatePreview = async (
     component: IComponent
   }
 
-  const ${fileName}Preview = ({ component }: Props) => {
-  const { isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+  const ${fileName}Preview = ({ component, index }: Props) => {
+  const { isOver } = useDropComponent(component.id, index, ref)
+  const { props, ref } = useInteractive(component, index)
 
   if (isOver) {
       props.bg = 'teal.50'
@@ -908,30 +908,30 @@ export const generatePanel = async (
     eligibleParams?.some(
       param => param.type === 'string' || param.type === 'number',
     )
-      ? `import TextControl from '~components/inspector/controls/TextControl'`
+      ? `import TextControl from 'src/components/inspector/controls/TextControl'`
       : ''
   }
   ${
     eligibleParams?.some(param => param.type === 'boolean')
-      ? `import SwitchControl from '~components/inspector/controls/SwitchControl'`
+      ? `import SwitchControl from 'src/components/inspector/controls/SwitchControl'`
       : ''
   }
   ${
     eligibleParams?.some(param => param.type === 'color')
-      ? `import ColorsControl from '~components/inspector/controls/ColorsControl'`
+      ? `import ColorsControl from 'src/components/inspector/controls/ColorsControl'`
       : ''
   }
   ${
     eligibleParams?.some(param => param.type === 'display')
-      ? `import FormControl from '~components/inspector/controls/FormControl'
-  import { useForm } from '~hooks/useForm'
-  import usePropsSelector from '~hooks/usePropsSelector'
+      ? `import FormControl from 'src/components/inspector/controls/FormControl'
+  import { useForm } from 'src/hooks/useForm'
+  import usePropsSelector from 'src/hooks/usePropsSelector'
   import { Select } from '@chakra-ui/react'`
       : ''
   }
   ${
     eligibleParams?.some(param => param.type === 'icon')
-      ? `import IconControl from '~components/inspector/controls/IconControl'`
+      ? `import IconControl from 'src/components/inspector/controls/IconControl'`
       : ''
   }
 
@@ -987,8 +987,8 @@ export const generateICPreview = async (
   selectedComponent?: string,
 ) => {
   let code = `import React from 'react'
-  import { useDropComponent } from '~hooks/useDropComponent'
-  import { useInteractive } from '~hooks/useInteractive'
+  import { useDropComponent } from 'src/hooks/useDropComponent'
+  import { useInteractive } from 'src/hooks/useInteractive'
   import { Box } from "@chakra-ui/react";
 
   ${`import { ${fileName} } from '${selectedComponent}';`}
@@ -997,10 +997,10 @@ export const generateICPreview = async (
     component: IComponent
   }
 
-  const ${fileName}Preview = ({ component }: Props) => {
+  const ${fileName}Preview = ({ component, index }: Props) => {
 
-  const { isOver } = useDropComponent(component.id)
-  const { props, ref } = useInteractive(component, true)
+  const { isOver } = useDropComponent(component.id, index, ref)
+  const { props, ref } = useInteractive(component, index)
 
   if (isOver) {
       props.bg = 'teal.50'

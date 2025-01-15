@@ -3,8 +3,8 @@ import { Flex, IconButton, useTheme } from '@chakra-ui/react'
 import { HiOutlineDesktopComputer } from 'react-icons/hi'
 import { MdOutlineTabletMac } from 'react-icons/md'
 import { ImMobile } from 'react-icons/im'
-import useDispatch from '~hooks/useDispatch'
-import { getEditorWidth } from '~core/selectors/app'
+import useDispatch from 'src/hooks/useDispatch'
+import { getEditorWidth } from 'src/core/selectors/app'
 import { useSelector } from 'react-redux'
 
 const ResponsiveToolBar = () => {

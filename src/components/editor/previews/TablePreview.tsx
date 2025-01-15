@@ -1,19 +1,20 @@
 import React from 'react'
 import * as Chakra from '@chakra-ui/react'
-import { useInteractive } from '~hooks/useInteractive'
-import { useDropComponent } from '~hooks/useDropComponent'
-import ComponentPreview from '~components/editor/ComponentPreview'
+import { useInteractive } from 'src/hooks/useInteractive'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import ComponentPreview from 'src/components/editor/ComponentPreview'
 import { Table, Tr, TableContainer, Box } from '@chakra-ui/react'
+import index from 'src/core/models'
 
-const TablePreview: React.FC<IPreviewProps> = ({ component }) => {
+const TablePreview: React.FC<IPreviewProps> = ({ component, index }) => {
   const acceptedTypes = [
     'TableCaption',
     'THead',
     'TBody',
     'TFoot',
   ] as ComponentType[]
-  const { props, ref } = useInteractive(component, true)
-  const { drop, isOver } = useDropComponent(component.id, acceptedTypes)
+  const { props, ref } = useInteractive(component, index)
+  const { drop, isOver } = useDropComponent(component.id, index, ref, acceptedTypes)
 
   let boxProps: any = {}
 
@@ -26,7 +27,7 @@ const TablePreview: React.FC<IPreviewProps> = ({ component }) => {
       <TableContainer>
         <Table {...props}>
           {component.children.map((key: string) => (
-            <ComponentPreview key={key} componentName={key} />
+            <ComponentPreview key={key} index={index} componentName={key} />
           ))}
         </Table>
       </TableContainer>
@@ -34,10 +35,10 @@ const TablePreview: React.FC<IPreviewProps> = ({ component }) => {
   )
 }
 
-export const TrPreview: React.FC<IPreviewProps> = ({ component }) => {
+export const TrPreview: React.FC<IPreviewProps> = ({ component, index }) => {
   const acceptedTypes = ['Td', 'Th'] as ComponentType[]
-  const { props, ref } = useInteractive(component, true)
-  const { drop, isOver } = useDropComponent(component.id, acceptedTypes)
+  const { props, ref } = useInteractive(component, index)
+  const { drop, isOver } = useDropComponent(component.id, index, ref, acceptedTypes)
 
   if (isOver) {
     props.bg = 'teal.50'
@@ -46,7 +47,7 @@ export const TrPreview: React.FC<IPreviewProps> = ({ component }) => {
   return (
     <Tr {...props} ref={drop(ref)}>
       {component.children.map((key: string) => (
-        <ComponentPreview key={key} componentName={key} />
+        <ComponentPreview key={key} index={index} componentName={key} />
       ))}
     </Tr>
   )

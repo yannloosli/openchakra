@@ -1,8 +1,8 @@
 import React, { memo } from 'react'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SizeControl from '~components/inspector/controls/SizeControl'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SizeControl from 'src/components/inspector/controls/SizeControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
 
 const RadioPanel = () => {
   const size = usePropsSelector('size')

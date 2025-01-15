@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
-import { RootState } from '~core/store'
-import { getDefaultFormProps } from '~utils/defaultProps'
-import { useInspectorUpdate } from '~contexts/inspector-context'
+import { RootState } from 'src/core/store'
+import { getDefaultFormProps } from 'src/utils/defaultProps'
+import { useInspectorUpdate } from 'src/contexts/inspector-context'
 import { useEffect } from 'react'
 
 const usePropsSelector = (propsName: string) => {

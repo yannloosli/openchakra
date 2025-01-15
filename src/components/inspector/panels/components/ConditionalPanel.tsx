@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
 import { Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
-import { useForm } from '~hooks/useForm'
-import usePropsSelector from '~hooks/usePropsSelector'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import { useForm } from 'src/hooks/useForm'
+import usePropsSelector from 'src/hooks/usePropsSelector'
 
 const ConditionalPanel = () => {
   const { setValueFromEvent } = useForm()

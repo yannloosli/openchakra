@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SizeControl from '~components/inspector/controls/SizeControl'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
-import TextControl from '~components/inspector/controls/TextControl'
-import NumberControl from '~components/inspector/controls/NumberControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SizeControl from 'src/components/inspector/controls/SizeControl'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
+import TextControl from 'src/components/inspector/controls/TextControl'
+import NumberControl from 'src/components/inspector/controls/NumberControl'
 
 const NumberInputPanel = () => {
   const size = usePropsSelector('size')

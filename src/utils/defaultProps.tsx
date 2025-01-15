@@ -110,7 +110,7 @@ import {
     GridItemProps,
 } from '@chakra-ui/react'
 
-import iconsList from '~iconsList'
+import iconsList from 'src/iconsList'
 import { AddIcon } from '@chakra-ui/icons'
 
 type PropsWithForm<T> = T & { form?: T }

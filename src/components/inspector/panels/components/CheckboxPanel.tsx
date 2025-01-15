@@ -1,11 +1,11 @@
 import React, { memo } from 'react'
-import ColorsControl from '~components/inspector/controls/ColorsControl'
-import ChildrenControl from '~components/inspector/controls/ChildrenControl'
-import { useForm } from '~hooks/useForm'
-import FormControl from '~components/inspector/controls/FormControl'
+import ColorsControl from 'src/components/inspector/controls/ColorsControl'
+import ChildrenControl from 'src/components/inspector/controls/ChildrenControl'
+import { useForm } from 'src/hooks/useForm'
+import FormControl from 'src/components/inspector/controls/FormControl'
 import { Select } from '@chakra-ui/react'
-import usePropsSelector from '~hooks/usePropsSelector'
-import SwitchControl from '~components/inspector/controls/SwitchControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import SwitchControl from 'src/components/inspector/controls/SwitchControl'
 
 const CheckboxPanel = () => {
   const { setValueFromEvent } = useForm()

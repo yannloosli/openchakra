@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { useSelector } from 'react-redux'
-import { getSelectedComponentId } from '~core/selectors/components'
+import { getSelectedComponentId } from 'src/core/selectors/components'
 import useDispatch from './useDispatch'
 
 export const useParamsForm = () => {

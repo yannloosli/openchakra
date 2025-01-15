@@ -1,9 +1,9 @@
 import React, { memo } from 'react'
 import { SimpleGrid, Select } from '@chakra-ui/react'
-import FormControl from '~components/inspector/controls/FormControl'
-import usePropsSelector from '~hooks/usePropsSelector'
-import { useForm } from '~hooks/useForm'
-import TextControl from '~components/inspector/controls/TextControl'
+import FormControl from 'src/components/inspector/controls/FormControl'
+import usePropsSelector from 'src/hooks/usePropsSelector'
+import { useForm } from 'src/hooks/useForm'
+import TextControl from 'src/components/inspector/controls/TextControl'
 
 const DimensionPanel = () => {
   const { setValueFromEvent } = useForm()

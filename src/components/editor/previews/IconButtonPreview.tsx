@@ -1,7 +1,7 @@
 import React from 'react'
-import { useDropComponent } from '~hooks/useDropComponent'
-import { useInteractive } from '~hooks/useInteractive'
-import icons from '~iconsList'
+import { useDropComponent } from 'src/hooks/useDropComponent'
+import { useInteractive } from 'src/hooks/useInteractive'
+import icons from 'src/iconsList'
 import { IconButton } from '@chakra-ui/react'
 
 const IconButtonPreview = ({ component, index }: IPreviewProps) => {
